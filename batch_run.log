@@ -1,0 +1,17 @@
+Loading configuration from /Users/yakkshit/Downloads/project/hiwi2/p1/bumblebee_task/Scripts/../.env.local
+Input:    /Users/yakkshit/Downloads/project/hiwi2/p1/Videos
+Output:   /Users/yakkshit/Downloads/project/hiwi2/p1/V_OUTPUTS
+Settings: /Users/yakkshit/Downloads/project/hiwi2/p1/bumblebee_task/working.settings
+TREX_CMD: /opt/miniconda3/envs/track/bin/TRex.app/Contents/MacOS/TRex
+PYTHON_CMD: /Users/yakkshit/Downloads/project/hiwi2/p1/.venv/bin/python3
+----------------------------------------
+Found 77 video(s) to process
+
+[1/77] 2025-04-22 16-28-22.mp4
+  → output: /Users/yakkshit/Downloads/project/hiwi2/p1/V_OUTPUTS/2025-04-22 16-28-22
+  ✓ done
+  → generating tracked MP4
+  ✓ tracked MP4 created
+
+[2/77] 2025-04-25 12-45-27.mp4
+  → output: /Users/yakkshit/Downloads/project/hiwi2/p1/V_OUTPUTS/2025-04-25 12-45-27

@@ -1,0 +1,10 @@
+**/*.pv
+.DS_Store
+
+# Ignore settings files
+.env.local
+
+/Output/trex_outputs/bee_*
+/Output/trex_outputs/bee_results/**/*
+
+bumblebee_task/Output/trex_outputs/bee_results/
