@@ -8,244 +8,116 @@
 
 ### Step 1: Place Your Videos
 ```bash
-# Copy your bee videos here:
-cp your_videos/*.mp4 bumblebee_task/../../Videos/
+cp your_videos/*.mp4 Videos/
 ```
 
 Supported formats: `.mp4`, `.mov`
 
-### Step 2: Run TREX Tracking
+### Step 2: Run the Full Pipeline
 ```bash
 cd bumblebee_task/
 bash Scripts/new_batch.sh
 ```
 
-**What happens:**
-- ✓ TREX processes all videos in `Videos/`
-- ✓ Generates tracking data (CSV)
-- ✓ Creates tracked MP4 videos
-- ✓ Saves results to `V_OUTPUTS/`
+**What happens automatically:**
+1. **TRex** — background subtraction tracking → `data/*_id0.csv`
+2. **post_process_tracking.py** — arena circle events → `data/*_id0_new.csv` + `*_events.csv`
+3. **generate_tracked_video.py** — tracked MP4 with gray (84 cm) and yellow (42 cm) circles
 
 ### Step 3: View Results
 ```bash
-# Watch tracked video with bee position & angle
-open V_OUTPUTS/2025-06-03\ 14-57-02/2025-06-03\ 14-57-02_tracked.mp4
+# Tracked video with circles + events
+open "V_OUTPUTS/2025-06-05 15-16-32/2025-06-05 15-16-32_tracked.mp4"
 
-# Check tracking quality
-cat V_OUTPUTS/tracking_quality_summary.csv
+# Enriched frame-by-frame data (use this for analysis)
+open "V_OUTPUTS/2025-06-05 15-16-32/data/2025-06-05 15-16-32_id0_new.csv"
+
+# Entry/exit events only
+open "V_OUTPUTS/2025-06-05 15-16-32/data/2025-06-05 15-16-32_events.csv"
+
+# Quality summary
+python Scripts/check_tracking_quality.py
 ```
 
 ---
 
-## 🎯 Option 1: Basic Tracking (No ROI)
-**Use when:** You want to track the entire video frame.
+## 📊 Output Files
 
-```bash
-bash Scripts/new_batch.sh
-```
-
-**Output:**
-- `*_tracked.mp4` — Video with bee position (green circle), angle (arrow), and speed label
-- `*_id0.csv` — Frame-by-frame data (X, Y, angle, speed, etc.)
-
----
-
-## 🎯 Option 2: ROI-Based Tracking (NEW!)
-**Use when:** You want tracking to activate only when bee enters a specific circle/region.
-
-### Step 1: Draw the Region
-```bash
-python Scripts/roi_tracker_gui.py
-```
-
-**What to do:**
-1. Window opens showing first video frame
-2. **CLICK** on the frame to set circle center (green dot appears)
-3. **DRAG** to set radius (green circle grows)
-4. **RELEASE** to confirm
-5. Press **SPACE** to save, **ESC** to cancel
-
-**Output:** `roi_config.json` saved in output folder
-
-### Step 2: Run TREX with ROI
-```bash
-bash Scripts/new_batch.sh
-```
-
-**What happens automatically:**
-- TREX tracks the entire video
-- ROI filter removes frames outside your circle
-- MP4 shows only bee activity inside ROI (outside = red X)
+| File | Description |
+|------|-------------|
+| `data/*_id0.csv` | Raw TRex export (never modified) |
+| `data/*_id0_new.csv` | All TRex columns **plus** arena/event columns |
+| `data/*_events.csv` | Summary: video entry, inner/outer entry & exit |
+| `*_tracked.mp4` | Visualization — gray outer (84 cm), yellow inner (42 cm) |
+| `tracking_quality_summary.csv` | Detection % per video |
 
 ---
 
-## 📊 Understanding the Tracked Video
+## 🎯 Arena Circles
 
-### Visual Elements
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TREX Tracked Video                   Frame: 1260
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                                   
-    🟢 Green Circle                  Position: (36.4, 40.3) cm
-    └─ Bee detected here             
-                                     Speed: 5.2 cm/s
-    → Green Arrow                    Angle: 22°
-    └─ Heading direction             Detection: ✓ FOUND
-                                   
-    🔴 Red X                         Missing: FALSE
-    └─ Bee NOT detected here         
-    
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+Configured in `circle_config.json`:
 
-### Color Legend
-| Symbol | Meaning | Action |
-|--------|---------|--------|
-| 🟢 Circle | Bee detected | Good tracking |
-| → Arrow | Body heading | Shows direction bee is facing |
-| 🔴 X mark | Bee missing | Lost tracking or outside ROI |
-| Text | Speed, angle | Real-time values |
+| Circle | Diameter | Used for |
+|--------|----------|----------|
+| Outer (gray in MP4) | **84 cm** | Tracking boundary — `arena_tracked=1` only inside |
+| Inner (yellow in MP4) | **42 cm** | Feeder zone — inner entry/exit events |
+
+Distance uses TRex `BORDER_DISTANCE#pcentroid` ([TRex format docs](https://trex.run/docs/formats.html)).
 
 ---
 
-## 📈 Analyzing the Results
+## 🔧 Post-Process Without Re-Running TRex
 
-### Quick Quality Check
+If you already have `*_id0.csv` files:
+
 ```bash
-cat V_OUTPUTS/tracking_quality_summary.csv
+cd bumblebee_task/Scripts
+python3 post_process_tracking.py          # all videos
+python3 post_process_tracking.py "2025" # filter by name
 ```
-
-**Look for:**
-- `pct` (detection %): should be >70%
-- If <30%: TREX settings need tuning (see Troubleshooting below)
-
-### Detailed Analysis in Jupyter
-```bash
-jupyter notebook Scripts/bee_analysis.ipynb
-```
-
-**Plots include:**
-- Bee trajectory over time
-- Detection rate (frames found vs. lost)
-- Speed curve
-- Acceleration profile
 
 ---
 
-## ⚙️ Tuning for Better Detection
+## ⚙️ Improve Detection Accuracy
 
-### Problem: Low Detection Rate (<30%)
+Edit `working.settings`:
 
-**Solution 1: Lower detection threshold**
-```bash
-# Edit: bumblebee_task/working.settings
-# Change:
-detect_threshold = 7
-# To:
-detect_threshold = 5
-# Then rerun:
-bash Scripts/new_batch.sh
+```ini
+detect_threshold = 7        # lower = more sensitive (try 5–7)
+track_max_speed = 24.73688
+cm_per_pixel = 0.0773       # must match camera calibration
 ```
 
-**Solution 2: Check video quality**
-```bash
-# View background reference (should be clear)
-open V_OUTPUTS/2025-06-03\ 14-57-02/average_*.png
-```
-
-If the background is blurry or noisy, the video may need better lighting.
-
----
-
-## 📁 Project Structure
-
-```
-bumblebee_task/
-├── Scripts/
-│   ├── new_batch.sh                 ← Main entry point
-│   ├── roi_tracker_gui.py           ← Draw ROI circle
-│   ├── roi_filter.py                ← Apply ROI filtering
-│   ├── generate_tracked_video.py    ← MP4 visualization
-│   ├── check_tracking_quality.py    ← Quality stats
-│   └── bee_analysis.ipynb           ← Analysis notebook
-├── nots/
-│   ├── docs.md                      ← Full documentation
-│   ├── ARCHITECTURE.md              ← System design
-│   └── QUICKSTART.md                ← This file
-├── working.settings                 ← TREX parameters
-└── .env.local                       ← Paths & config
-```
+Then re-run `bash Scripts/new_batch.sh`.
 
 ---
 
 ## 🆘 Troubleshooting
 
-### Q: "TREX executable not found"
-**Answer:**
-```bash
-# Check if TREX is installed
-ls /opt/miniconda3/envs/track/bin/TRex.app/Contents/MacOS/TRex
+**Low detection rate?**
+- Lower `detect_threshold` in `working.settings`
+- Check `*_tracked.mp4` — green dot should follow the bee
+- Run `python Scripts/check_tracking_quality.py`
 
-# If missing, TREX needs to be installed in the conda environment
-```
+**Circles misaligned in MP4?**
+- Adjust `center_offset_x_px` / `center_offset_y_px` in `circle_config.json`
 
-### Q: Low detection rate (36%)
-**Answer:**
-1. Lower `detect_threshold` in `working.settings` (try 3-5)
-2. Check video brightness (view `average_*.png`)
-3. Ensure bee is visible in the video
-
-### Q: MP4 generation failed
-**Answer:**
-```bash
-# Check the error log
-cat V_OUTPUTS/2025-06-03\ 14-57-02/generate_tracked.log
-
-# Common cause: missing OpenCV library
-pip install opencv-python
-```
-
-### Q: ROI filter not working
-**Answer:**
-Make sure you ran `roi_tracker_gui.py` first and saved the ROI circle.
+**Too many/few outer exit events?**
+- Adjust `visit_gap_frames` in `circle_config.json` (default 20 frames)
 
 ---
 
-## 💾 Data Storage
-
-### Outputs saved to: `V_OUTPUTS/`
+## 📁 Key Scripts
 
 ```
-V_OUTPUTS/
-├── batch_log.txt                    ← Summary of all runs
-├── tracking_quality_summary.csv     ← Stats per video
-└── 2025-06-03\ 14-57-02/           ← One folder per video
-    ├── 2025-06-03\ 14-57-02_tracked.mp4    ← ⭐ Watch this
-    ├── data/2025-06-03\ 14-57-02_id0.csv  ← Raw tracking
-    ├── roi_config.json              ← If ROI was used
-    └── (various logs and temp files)
+bumblebee_task/Scripts/
+├── new_batch.sh                 ← Main entry point
+├── post_process_tracking.py     ← Arena events → id0_new.csv
+├── generate_tracked_video.py    ← Tracked MP4
+├── check_tracking_quality.py    ← Quality summary
+└── arena_config.py              ← Shared circle geometry
+
+bumblebee_task/
+├── circle_config.json           ← Inner/outer diameters + centre offset
+└── working.settings             ← TRex parameters
 ```
-
----
-
-## 🔗 Next Steps
-
-1. **Run basic tracking:** `bash Scripts/new_batch.sh`
-2. **Review results:** Watch `*_tracked.mp4`
-3. **Analyze data:** Open `bee_analysis.ipynb` in Jupyter
-4. **Improve detection:** Adjust `working.settings` if needed
-5. **Add ROI:** Use `roi_tracker_gui.py` for conditional tracking
-
----
-
-## 📞 Help & References
-
-- **TREX Docs:** https://trex.run/docs/
-- **Project Overview:** See `docs.md`
-- **System Architecture:** See `ARCHITECTURE.md`
-- **Python env:** `/opt/miniconda3/envs/track`
-
----
-
-**Ready to track some bees? 🐝** Run `bash Scripts/new_batch.sh`

@@ -55,3 +55,22 @@ Step 2 — Check tracking quality:
 
 Step 3 — Analyse results:
   jupyter notebook Scripts/bee_analysis.ipynb
+
+
+
+### New one### 
+
+```
+  # Full reprocess (recommended now that settings are improved):
+  FORCE=1 bash Scripts/new_batch.sh
+
+  # Reprocess Python steps only (no TRex re-run):
+  bash Scripts/new_batch.sh
+
+  # Skip already-done videos (default):
+  bash Scripts/new_batch.sh
+
+  # Keep full 1920×1080 resolution in output:
+  FULL_RES=1 bash Scripts/new_batch.sh
+
+```

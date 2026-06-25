@@ -1,8 +1,8 @@
 # Project Workflow & Architecture — Complete Integration Guide
 
 **Status:** ✅ **Production Ready**  
-**Last Updated:** June 3, 2026  
-**Version:** 2.0 (ROI-based tracking added)
+**Last Updated:** June 17, 2026  
+**Version:** 3.0 (arena circle events + id0_new.csv)
 
 ---
 
@@ -12,13 +12,14 @@
 
 **Current Capabilities:**
 - ✅ Batch video processing (multiple videos)
-- ✅ Frame-by-frame bee detection & tracking
+- ✅ Frame-by-frame bee detection & tracking (TRex background subtraction)
 - ✅ Body angle/orientation extraction (in radians)
-- ✅ Speed & acceleration computation
-- ✅ Visualization with tracked MP4 videos
-- ✅ Quality metrics (detection rate, etc.)
-- ✅ **NEW:** ROI-based tracking (conditional)
-- ✅ **NEW:** Interactive GUI for ROI selection
+- ✅ Speed, acceleration, BORDER_DISTANCE, posture fields from TRex
+- ✅ **Arena event post-processing** — inner/outer circle entry & exit
+- ✅ Enriched CSV output (`*_id0_new.csv`) — original `*_id0.csv` preserved
+- ✅ Per-video event summary (`*_events.csv`)
+- ✅ Visualization with tracked MP4 videos (84 cm outer / 42 cm inner overlay)
+- ✅ Quality metrics (TRex detection % + arena tracked %)
 
 **In Progress:**
 - 🔄 Parameter tuning for better detection (currently 36%)
@@ -39,29 +40,30 @@
 INPUT VIDEOS
      ↓
   ┌─────────────────────────┐
-  │  TREX Tracking Engine   │ ← Detects bee via background subtraction
+  │  TREX Tracking Engine   │ ← Background subtraction → *_id0.csv
   └──────────┬──────────────┘
              ↓
   ┌─────────────────────────┐
-  │  ROI Filter (Optional)  │ ← Filters frames by circle region
+  │  post_process_tracking  │ ← 84 cm / 42 cm arena events → *_id0_new.csv
   └──────────┬──────────────┘
              ↓
   ┌─────────────────────────┐
-  │  MP4 Visualization      │ ← Draws detected positions + angles
+  │  MP4 Visualization      │ ← Reads id0_new.csv, draws circles + events
   └──────────┬──────────────┘
              ↓
-  OUTPUT: Tracked video + CSV data
+  OUTPUT: Tracked video + raw CSV + enriched CSV + events CSV
 ```
 
 ### Component Responsibilities
 
 | Component | Role | Input | Output |
 |-----------|------|-------|--------|
-| `new_batch.sh` | Orchestrator | Video files | Orchestrates TREX, ROI, MP4 gen |
-| `TREX binary` | Tracker | Video + settings | CSV + .results + logs |
-| `roi_tracker_gui.py` | Visualizer | Video first frame | `roi_config.json` |
-| `roi_filter.py` | Post-processor | CSV + ROI JSON | Filtered CSV |
-| `generate_tracked_video.py` | Renderer | CSV + video | Tracked MP4 |
+| `new_batch.sh` | Orchestrator | Video files | Runs TRex → post-process → MP4 |
+| `TREX binary` | Tracker | Video + settings | `data/*_id0.csv` + logs |
+| `post_process_tracking.py` | Event analyzer | `*_id0.csv` + `circle_config.json` | `*_id0_new.csv`, `*_events.csv` |
+| `arena_config.py` | Shared geometry | `circle_config.json` | Inner Ø42 cm, outer Ø84 cm |
+| `generate_tracked_video.py` | Renderer | `*_id0_new.csv` + video | `*_tracked.mp4` |
+| `check_tracking_quality.py` | QA summary | All output folders | `tracking_quality_summary.csv` |
 | `bee_analysis.ipynb` | Analyzer | CSV | Plots & statistics |
 
 ---
@@ -90,11 +92,12 @@ User inputs:
          │   │   ├─ Settings: working.settings
          │   │   └─ Output: data/*_id0.csv
          │   │
-         │   ├─→ [SKIP ROI check — no roi_config.json]
+         │   ├─→ Run post_process_tracking.py
+         │   │   └─ Output: data/*_id0_new.csv + *_events.csv
          │   │
          │   └─→ Run generate_tracked_video.py
-         │       ├─ Input: CSV + video
-         │       ├─ Draw: circles + arrows
+         │       ├─ Input: id0_new.csv + video
+         │       ├─ Draw: 84 cm / 42 cm circles + arrows
          │       └─ Output: *_tracked.mp4
          │
          └─→ Summary: batch_log.txt
@@ -163,112 +166,99 @@ User inputs:
 ```
 
 **Key Output Files:**
-- `V_OUTPUTS/{video_name}/roi_config.json` — ROI definition
-- `V_OUTPUTS/{video_name}/{video_name}_id0.csv` — Filtered tracking
-- `V_OUTPUTS/{video_name}/{video_name}_id0_backup.csv` — Original (unfiltered)
-- `V_OUTPUTS/{video_name}/{video_name}_tracked.mp4` — ROI-filtered visualization
+- `V_OUTPUTS/{video_name}/data/{video_name}_id0.csv` — Raw TRex export (unchanged)
+- `V_OUTPUTS/{video_name}/data/{video_name}_id0_new.csv` — **Enriched** frame data with arena columns
+- `V_OUTPUTS/{video_name}/data/{video_name}_events.csv` — One row per entry/exit event
+- `V_OUTPUTS/{video_name}/{video_name}_tracked.mp4` — Visualization with gray/yellow circles
+- `V_OUTPUTS/batch_log.txt` — Run summary
 
 ---
 
 ## 💾 Data Format & Interpretation
 
-### CSV Structure (Frame-by-Frame)
+### Arena Geometry (`circle_config.json`)
 
-```csv
-frame,X (cm),Y (cm),ANGLE,SPEED (cm/s),ACCELERATION#pcentroid (cm/s²),ANGULAR_VELOCITY#centroid,missing,num_pixels
-0,34.5,38.2,0.15,0.0,0.0,0.0,0,26
-1,34.5,38.2,0.12,0.0,0.0,-0.02,0,27
-2,34.6,38.3,0.10,1.2,15.3,-0.04,0,26
-3,inf,inf,inf,inf,inf,inf,1,inf
+| Circle | Diameter | Radius | Role |
+|--------|----------|--------|------|
+| **Outer (gray in MP4)** | 84 cm | 42 cm | Active tracking boundary — bee must be inside to count as `arena_tracked=1` |
+| **Inner (yellow in MP4)** | 42 cm | 21 cm | Feeder zone — inner entry/exit events |
+
+Distance from centre uses TRex `BORDER_DISTANCE#pcentroid (cm)` when available:
+`dist_to_center_cm = 42 − BORDER_DISTANCE` ([TRex docs](https://trex.run/docs/formats.html)).
+
+### Raw CSV (`*_id0.csv`) — TRex export
+
+All standard TRex kinematic fields are preserved, including:
+`frame`, `X (cm)`, `Y (cm)`, `ANGLE`, `SPEED (cm/s)`, `VX/VY`, `AX/AY`,
+`BORDER_DISTANCE#pcentroid (cm)`, `MIDLINE_OFFSET`, `num_pixels`, `time`, `missing`, etc.
+
+### Enriched CSV (`*_id0_new.csv`) — added columns
+
+| Column | Meaning |
+|--------|---------|
+| `dist_to_center_cm` | Radial distance from arena centre (cm) |
+| `in_inner_circle` | 1 if detected inside 42 cm feeder zone |
+| `in_outer_circle` | 1 if detected inside 84 cm arena |
+| `arena_tracked` | 1 if actively tracked inside outer arena |
+| `outside_arena` | 1 if TRex detected bee but outside 84 cm circle |
+| `is_video_entry` | 1 on first bee appearance in video |
+| `is_outer_entry` / `is_outer_exit` | 1 on outer circle crossing |
+| `is_inner_entry` / `is_inner_exit` | 1 on inner circle crossing |
+| `circle_event` | Event label(s) on that frame |
+
+### Events CSV (`*_events.csv`)
+
+| Column | Meaning |
+|--------|---------|
+| `event` | `video_entry`, `outer_entry`, `inner_entry`, `inner_exit`, `outer_exit` |
+| `frame`, `time_s` | When the event occurred |
+| `X_cm`, `Y_cm`, `dist_to_center_cm` | Bee position at event |
+| `ANGLE_rad`, `SPEED_cm_s` | TRex posture/kinematics at event |
+
+### Post-process existing outputs (without re-running TRex)
+
+```bash
+cd bumblebee_task/Scripts
+python3 post_process_tracking.py              # all videos in V_OUTPUTS
+python3 post_process_tracking.py "2025-06-05" # one video
+python3 check_tracking_quality.py           # summary with arena_tracked %
 ```
-
-### Column Meanings
-
-| Column | Unit | Range | Meaning |
-|--------|------|-------|---------|
-| `frame` | — | 0-23680 | Frame number |
-| `X (cm)` | cm | 0-100 | X position (absolute) |
-| `Y (cm)` | cm | 0-100 | Y position (absolute) |
-| `ANGLE` | radians | -π to +π | Body heading (0=right, π/2=up) |
-| `SPEED (cm/s)` | cm/s | 0-50 | Walking speed |
-| `ACCELERATION#pcentroid` | cm/s² | -100-100 | Speed change rate |
-| `ANGULAR_VELOCITY#centroid` | rad/s | -π-π | Rotation speed |
-| `missing` | flag | 0 or 1 | 0=detected, 1=lost/outside ROI |
-| `num_pixels` | pixels | 10-100 | Bee body size in frame |
 
 ### Interpreting Results
 
-**Good Detection:**
+**Good detection (inside arena):**
 ```
-✓ missing=0, X & Y are numbers, ANGLE is -π to π
-→ Bee was detected in this frame
-```
-
-**Lost Tracking:**
-```
-✗ missing=1, X & Y are inf, ANGLE is inf
-→ Bee was NOT detected (lost track or outside ROI)
+✓ arena_tracked=1, missing=0, X & Y are numbers
+→ Bee detected inside the 84 cm outer circle
 ```
 
-**Detection Rate Calculation:**
+**Lost tracking:**
 ```
-Detection % = (frames with missing=0) / (total frames) × 100
-Example: 8536 detected / 23680 total = 36.0%
+✗ missing=1 or arena_tracked=0
+→ Bee not detected, or outside the outer arena boundary
+```
+
+**Detection rate:**
+```
+TRex detection %  = (missing=0) / total frames
+Arena tracked %   = (arena_tracked=1) / total frames   ← use this for behaviour analysis
 ```
 
 ---
 
-## 🎯 ROI-Based Tracking Explained
+## 🎯 Arena Circle Tracking
 
-### What is ROI?
-**ROI = Region of Interest** — A circular region where you want tracking to be active.
+Tracking is active only when the bee is inside the **84 cm outer circle** (gray overlay in `*_tracked.mp4`).
 
-### Why Use It?
-1. **Conditional tracking** — Only track bee inside specific area
-2. **Noise reduction** — Ignore wall/object movement outside circle
-3. **Behavior focus** — Study bee behavior in confined region
-4. **Data filtering** — Post-process to reduce false positives
+| Event | Trigger |
+|-------|---------|
+| `video_entry` | First confirmed detection inside outer arena |
+| `outer_entry` | Bee re-enters outer arena after leaving (≥20 frame gap) |
+| `outer_exit` | Bee leaves outer arena or track lost for ≥20 frames |
+| `inner_entry` | `dist_to_center` crosses from >21 cm to ≤21 cm |
+| `inner_exit` | `dist_to_center` crosses from ≤21 cm to >21 cm |
 
-### How It Works (Technical)
-
-```
-Step 1: User draws circle
-  Center: (cx, cy) in pixels
-  Radius: r in pixels
-  Saved: roi_config.json
-
-Step 2: ROI filter applied
-  For each frame:
-    Read CSV row: (x_cm, y_cm, ...)
-    Convert cm → pixels: (x_px, y_px)
-    Calculate distance: d = √((x_px - cx)² + (y_px - cy)²)
-    If d ≤ r:
-      Keep detection (missing stays 0)
-    Else:
-      Set missing = 1 (mark as outside ROI)
-  
-Step 3: Save filtered CSV
-  Backup original: *_id0_backup.csv
-  Save filtered: *_id0.csv
-
-Step 4: MP4 generation
-  Uses filtered CSV
-  Frames inside ROI: green circle + arrow
-  Frames outside ROI: red X
-```
-
-### Example: Circle at (320, 240) with radius 150 pixels
-
-```
-Frame  X_cm  Y_cm  → (px)    Distance  Inside?  missing (after filter)
-1      30.0  35.0 → (490,572) 445 px  NO       1 (marked as lost)
-2      31.0  36.0 → (507,588) 465 px  NO       1
-3      35.0  40.0 → (571,654) 520 px  NO       1
-4      36.4  40.3 → (594,658) 560 px  NO       1
-5      32.0  35.0 → (522,572) 262 px  YES      0 (kept as detected)
-6      32.5  35.5 → (531,580) 279 px  YES      0
-7      33.0  36.0 → (539,588) 296 px  YES      0
-```
+Tune sensitivity in `circle_config.json`: `event_debounce_frames`, `visit_gap_frames`, `center_offset_*`.
 
 ---
 

@@ -1,0 +1,781 @@
+
+=================== PAGE 7 ===================
+ 
+1 
+ 
+1 INTRODUCTION 
+1.1 PATH INTEGRATION 
+The world is dominated by visual sensations. These visual cues are us ed by animals 
+to understand their location (Brines and Gould, 1982; Greif et al., 2014). Orientating in 
+animals is fundamental to survival, underscoring the importance of effective strategies 
+for navigating the environment (Heinze et al., 2018). Some animals, including insects, 
+rodents, and humans, have the ability  to continuously track their position relat ive to a 
+defined starting point  (Heinze et al., 2018; Savelli and Knierim, 2019) . They then 
+integrate the information about the directions and distances they have traveled with 
+the help of external landmarks to transf orm it into a sense of location (Heinze et al., 
+2018; Savelli and Knierim, 2019) . Therefore, the transformation of this information 
+results in a most direct “home vector” which directly points bac k to the initial starting 
+point (Heinze et al., 2018; Patel et al., 2022) , as shown as in Figure 1 (Egelhaaf and 
+Lindemann, 2025) . The animal’ s previous experience with this home path is not 
+relevant. This vector-based navigation is called path integration (Patel et al., 2024). 
+ 
+ 
+Figure 1 - The schematic and basic principles of path integration 
+The animal is walking from its nest entrance, which is its defined starting point, to an unknown food source. Therefore, it takes 
+an outbound path by walking in many small path segments or vectors, each pointing in a specific direction, searching for the 
+food source. As the animal arrives at the food source, the many vectors will be added  to a home vector, which indicates the 
+most direct return path back to the nest 
+Reproduced from Egelhaaf and Lindemann (2025) 
+ 
+
+
+
+=================== PAGE 11 ===================
+ 
+5 
+ 
+circular, and elliptical, are produced.(Hecht, 2002; Johnsen, 2012) They exhibit distinct 
+characteristics and behaviors. (Sparks et al., 2009)  
+However, the polarization types utilized in the experiment were limited to unpolarized 
+and linearly polarized light. Therefore, only unpolarized and linearly polarized light are 
+described. For the sake of simplicity, the text only mentions polarized light when further 
+describing the linearly polarized light used in the experiment. 
+ 
+ 
+Figure 2 – Schematic representation of two –unpolarized and linearly polarized - polarization types 
+A, B) Two different sates of linearly polarized light are represented. In A), horizontally linearly polarized light is illustrated. B) 
+represents vertically linearly polarized light. The electric field vector oscillates in one single direction that lies in a plan e 
+perpendicular to the direction of motion. 
+C) In unpolarized light, the beam consist of many waves with an uniform distribution of angles 
+Adapted from Foster et al. (2018) 
+ 
+1.2.1 Unpolarized light  
+Unpolarized light does not exhibit a consistent electric field orientation over time  
+(Foster et al., 2018). While each individual wave within the beam still oscillates in only 
+one single direction, the beam as a whole consist of many waves with a uniform 
+distribution (Foster et al., 2018). The light is considered completely unpolarized, when 
+all three polarization-related Stokes parameters are equal, as they describe the state 
+and the total intensity of polarization (Born and Wolf, 1999; Kozlov et al., 2018) . It 
+further implies the absence of any net  or dominant polarization state (Kozlov et al., 
+2018; Kroh et al., 2020).  
+1.2.2 Linearly polarized light 
+Linearly polarized light occurs when the electric field vector oscillates in a single plane 
+perpendicular to the direc tion of the light’s propagation (Manion and Stokkermans, 
+2025). Thus, the electric field vector or the axis of the electrical field of the wave will 
+be constant (Cronin, 2014). Depending on the angle t he electric field vector makes, 
+(C) (B) 
+
+
+=================== PAGE 12 ===================
+ 
+6 
+ 
+linearly polarized light is described as vertically polarized, horizontally polarized, or any 
+angle in between (Cronin, 2014; Foster et al., 2018). 
+In the case of a linear polarized light filter, irrespective of the form of light entering the 
+material- be it circularly polarized,  linearly polarized, or unpolarized – only linearly 
+polarized light is capable of existing the material (Hecht, 2002; Johnsen, 2012; Pedrotti 
+et al., 2018) . The filte r selectively absorbs  light waves whi ch are oscillating 
+perpendicular to that direction (Sedov et al., 2019) as illustrated in Figure 3. 
+ 
+Figure 3 – A filter material, as a linear  polarizer, transforms unpolarized light into linearly polarized light 
+The filter absorbs light waves oscillating horizontal, while it transmits the waves oscillating vertical. Therefore, only vertical 
+linearly polarized light is able to pass through the  polarizer. The unpolarized light is converted to linearly polarized light. 
+Reproduced from Wikipedia.org,, uploaded 21.04.2006, illustrated by Bob Mellish 
+https://en.wikipedia.org/wiki/Polarizer#/media/File:Wire-grid-polarizer.svg 
+If the incoming light is already linearly polarized, and if it is oriented in the direction, in 
+which the material blocks all electromagnetic waves, then it can be concluded that all 
+of the light will be blocked completely (Collett, 1993; Hecht, 2002; Johnsen, 2012).  
+In summary, animals frequently use celestial cues for navigation. Specifically, linearly 
+polarized light from skylight scattering functions as a reliable and widespread signal for 
+path integration, orientation, and resource detection. 
+1.3 POLARIZED-LIGHT PATTERNS IN THE SKY WITH SUNLIGHT 
+Skylight polarization patterns, a naturally occurring phenomenon caused by scattering 
+of sunlight in the atmosphere, have been shown to serve as navigation cues for certain 
+species (Homberg et al., 2011; Horváth, 2014; Wehner, 2001).  In Guan’s study, they 
+argue that t he patterns provide  directional information  (Guan et al., 2018) . 
+Furthermore, they suggest that t he information it provides pertains to the solar 
+meridian, the neutral point, and the polari zation angle. The solar meridian is defined 
+
+
+
+=================== PAGE 13 ===================
+ 
+7 
+ 
+as an imaginary line through the sun’s position and the zenith  (Muller et al., 2017) . 
+Thus, it divides the celestial sphere into eastern and western regions (Tate, 2010). The 
+neutral point lacks emission of polarized light in specific areas (Horváth, 2004; Horváth 
+et al., 2002) . Consequently, the position  of the sun , or the solar azimuth,  could be 
+detected by the animal and utilized for navigational purposes (Foster et al., 2018). 
+Important for its definition, the degree of polarization (DOP) and the angle of 
+polarization (AOP) have to be explained. AOP refers to  the axis along which the 
+predominant proportion of a light wave’s electric field strength is oriented (Foster et al., 
+2019), whereas the DOP is the percentage of polarized light int ensity in total light 
+intensity (Kong et al., 2023). 
+As the Figure 4 shows, the DOP of skylight exhi bits a minimum close to the sun  and 
+anti-sun (Pfeiffer et al., 2011) , where the neutral points (Horváth et al., 2002)  with a 
+DOP of 0  occurs (Cronin and Marshall, 2011) . A band of maximum degree of 
+polarization is observed at angles near 90° from the sun (Cronin and Marshall, 2011). 
+Due to the hemispherical shape of the observable sk y, this polarized light is mostly 
+observed in the anti-solar half of the sky (Foster, 2024). A gradual rise in the DOP, 
+commencing at a proximity to the sun and anti -sun, and culminating at a 90° to the 
+sun, is evident (Cronin and Marshall, 2011). 
+ 
+ 
+Figure 4 – Polarized-light patterns of skylight 
+Observing it from the center of the sphere (red spot), the sun is at a solar elevation of 40°, indicated by the yellow point.  The 
+blue lines demonstrate the degree of polarization with a maximum of 0.75. The light close to the sun is weakly polarized with 
+a DOP of 0, whereas the highest degree of polarization is observed along the solar equator at angles near 90° to the sun.  
+Adapted from Pfeiffer et al. (2011) 
+ 
+
+
+
+=================== PAGE 14 ===================
+ 
+8 
+ 
+Therefore, a certain particular of angles of polarization , as represent in Figure 4 , 
+occurs, allo wing the animals to use these polarization patterns to determine their 
+orientation (Homberg et al., 2011). 
+ 
+1.3.1 Clear sky 
+In the condition of a very clear sky with bright sunlight and an absence of clouds (Figure 
+5), the DOP of the band at angles near 90° from the  sun could approach 90 per cent 
+(Cronin and Marshall, 2011). However, in most cases, it will be lower than 90 per cent 
+(Cronin and Marshall, 2011). 
+In the instance that the sun is positioned in close proximity to the horizon, as is the 
+case during the dim light of dawn and dusk, the maximum of the DOP of the polarization 
+pattern of scattered light from celestial sources is reached (Araújo et al., 2024). 
+ 
+ 
+Figure 5 – The polarization pattern in a bright and clear sky with the sun shining 
+The red lines show the AOP, and the thickness of the lines indicates the DOP.  Close to the sun, the lines are disappearing as 
+the DOP reaches its minimum close to the sun. The images were taken with a fisheye polarization camera and processed with 
+Python 
+Figures courtesy of Georgios  Kolyfetis 
+ 
+1.3.2 Cloudy sky 
+In the presence of clouds,  an increased quantity of suspended particles is present in 
+the atmosphere (Isokääntä et al., 2022; Weigelt et al., 2009). Consequently, the effect 
+of multiple-path scattering is amplified, resulting in a depolarization of the light (Cronin 
+and Marshall, 2011). The DOP decreases (Wang et al., 2016), as shown in the three 
+
+
+
+=================== PAGE 15 ===================
+ 
+9 
+ 
+different cloudy conditions in Figure 6. A similar effect is also observed for air pollution 
+in the lower atmosphere (Cho et al., 2021).  
+In addition, the findings of Aycock et al.’s experiment demonstrated, that the precision 
+of polarization azimuth is reduced in overcast conditions relative to clear skies (Kong 
+et al., 2023) . In conditions of cloud cover, the DOP reac hes approximately 40% at  
+angles of 90° close to the sun (Können et al., 1985). 
+Nevertheless, given the extensive array of cloud types and the numerous factors that 
+influence the DOP of cloud light, the DOP may exhibit variability among different cloud 
+formations (Pomozi et al., 2001). 
+Nonetheless, should there be regions of the sky that remain uncovered  by clouds, 
+animals that navigate using polarization pattern cues may be able to utili ze these 
+patches of visible sky (Cronin and Marshall, 2011). The minimum DOP, that is essential 
+for ensuring accurate navigation within a specific patch of skylight is determined to be 
+approximately 5-10% (Pomozi et al., 2001). 
+ 
+ 
+Figure 6 – The polarization patterns in three different cloudy conditions 
+The red lines show the AOP, and the thickness of the lines indicates the DOP. In cloudy conditions, the DOP decrease because 
+of more scattering by suspended particles in the cloud. Depending whether there are still some patches of clear sky, the DOP 
+can still reach higher values of DOP. The images were taken with a fisheye polarization camera and processed with Python 
+Figures courtesy of Georgios Kolyfetis 
+ 
+Therefore, in comparison to clear sky , cloud cover increases the scattering in the 
+atmosphere, which leads to an increase in the degree of polarization and the precision 
+of polarization cues. While the degree of polarization can vary with the diversity of 
+cloud types, small clear patches of the sky can still provide enough information about 
+the polarization for accurate navigation. 
+
+
+
+=================== PAGE 16 ===================
+ 
+10 
+ 
+1.4 DORSAL RIM AREA – POLARIZATION SENSITIVITY IN BUMBLEBEES 
+The capacity of animals to utilize polarization pattern cues of the skylight for navigation 
+is dependent on the presence of specialized  visual s ystems and receptors , which 
+facilitate the detection and processing of this information (Greif et al., 2014; Ma et al., 
+2015; Wehner, 2001). 
+In the eyes of bumblebees, honey bees, locusts, desert ants, fruit fries and many other 
+insect species  (Labhart and Meyer, 1999) , a specific eye  region is essential for 
+polarization sensitivity (Hardcastle et al.; Labhart and Meyer, 1999; Zittrell et al., 2020).  
+The rhabdoms are photosensitive structures located in the eyes of many invertebrates 
+(Grusch et al., 1997; Reisenman et al., 2002) . The rhabdoms contain photosensitive 
+cells that are characterized by their dense microvilli  (Cronin, 2014; Rutherford and 
+Horridge, 1965) , which play a fundamental role for light absorption and 
+phototransduction (Eguchi et al., 1962; Rutherford and Horridge, 1965) . The specific 
+configuration of these microvilli determines a certain function of the rhabdoms (Foster, 
+2024; Greiner et al., 2007; Matsushita et al., 2012). In the dorsal rim area (DRA) of the 
+compound eye (Araújo et al., 2024; Foster, 2024), the rhabdoms play a crucial role for 
+polarization sensitivity (Foster, 2024; Greiner et al., 2007; Karman et al., 2012) . The 
+DRA is positioned in the upper portion of the compound eye and exhibits a dist inct 
+structural configuration compared to regions in the compound eye outside the DRA 
+(Jie et al., 2023). The DRA is lighter in color compared to the surrounding regions of 
+the eye, noticeable as a grey area within the compound eye, which, as shown in Figure 
+7 (Labhart and Meyer, 1999). This gray coloring is associated with its ability to disperse 
+light (Foster, 2024). 
+ 
+Figure 7 – Representation of the location of the dorsal  rim area and an electron micrograph of cross-sections through the 
+dorsal rim area of the honeybee Apis mellifera (Labhart and Meyer, 1999) 
+
+
+
+=================== PAGE 21 ===================
+ 
+15 
+ 
+two gravity feeders filled with a 0.5M sucrose solution in two slightly separate 
+chambers. The upper portion of each box was designed to be opened. 
+Access to the arena branched off between the two entry points located at either end of 
+the nest and the feeder box , which is shown in Figure 8 . A conical feeder was  
+positioned centrally within the arena, through which  the bumblebees were  provided 
+with a 1M sucrose solution (equi valent to 70 g of sucrose (Südzucker sugar cube s) 
+and 200 mL of H 2O) via multiple apert ures in the floor. The feeder was  strategically 
+situated at the base of the arena to ensure it did not serve as a visual stimulus for the 
+bumblebees. The feeder could  be filled and positioned at the base of the arena. The 
+distance between the conical feeder and the arena entrance measured 39 centimeters. 
+A round curtain was affixed to the periphery of the arena. 
+The arena was closed at the top with a polarization device, which was aligned with the 
+gravitational horizontal. Two circular rings, each comprising a UV LED (CUN6GF1A - 
+Seoul Viosys UV -A LED 365nm, CA3535) and a linear polarizing filter  in between  
+(Bolder Vision Optik  UV, Boulder, Colorado, USA – 1000 x 600 mm  Dichroic Film 
+Polarizer Sheet, 300  - 700 nm  transmission), were  connected to this apparatus, 
+enabling modulation of the intensity of the polarized light. A controller was constructed 
+for adjusting the intensity  polarized light, and  another controller was built for  
+unpolarized light. Both controllers were equipped with a range of settings, ranging from 
+0 to 8, allowing for precise adjustment. With higher settings, the LEDs responsible for 
+either unpolarized or polar ized light become brighter . This setup generated  an area 
+within the arena where the polarized light required for the experiment was emitted from 
+above. The polarization device was capable of being rotated by 90°, thereby enabling 
+the configuration of the "top, bottom" (TB) and "left, right" (LR)  settings. In the “TB” 
+condition, the angle of polarization was oriented along the axis extending from the 
+arena entrance to the feeder, thereby aligning with the orientation of the training 
+position. The bumblebee was entering the arena, and moving toward the feeder under 
+the familiar lighting conditions. This position was described as “vertical” in the following 
+text. During the feeding process at the feeder, the stimulu s was rotated anticlockwise 
+by 90°. Consequently, the bumblebee traversed back to the nest entrance, exhibitin g 
+a shift in the angle of polarization, which was now 90° shifted to the axis from feeder 
+to the nest entrance, which is indicated as the “horizontal” position.  In the “LR” 
+condition, the initial angle of polarization was 90° to the path from entrance to f eeder 
+
+
+=================== PAGE 23 ===================
+ 
+17 
+ 
+ 
+Figure 8 -  Experimental design 
+designed by Marie Jansen, digitalized by ChatGPT 4.0 
+To avoid disturbing the bumblebees, red LED light (Paulmann SimpLED 78979 LED 
+strip complete set with plug 12 V 7.5m RGB 1 pc, Conrad Electronic) was used when 
+directly engaging with the bumblebees. 
+2.3 EXPERIMENTAL PREPARATION 
+The transition from the preparatory stage to the training stage was accompanied by a 
+modification in the light stimulus. The intensity of the polarized light was set to 8, while 
+the intensity of the unpolarized light was set to 0. The bumblebees were  prevented 
+from accessing the feeder box, while access to the arena was permitted concurrently. 
+Consequently, the bumblebees had  permanent access to the arena, which enabled 
+them to explore it independently. 
+The objective of the training phase was to instruct foraging behavior in the bumblebees 
+and to support the subsequent localization of the conical feeder within a particular light 
+stimulus setting. To facilitate navigation, a sucrose solution trail was  also established 
+from the entrance of the arena to the feeder during the initial days. The duration of the 
+training phase typically ranged from three to seven days, depending on the number of 
+
+
+
+=================== PAGE 30 ===================
+ 
+24 
+ 
+In data from these trials, the measured bearings are not distributed equally (Figure 9). 
+There are two areas, one clustered around 120° and the other one around 300°. There 
+is no unimodal orientation which is proven with the Rayleigh-Test (p>0,05 with r = 0,15 
+and n = 7). The Circ-MLE suggests a bimodal model (M3A), with µ1=295,70°, κ1 = 4,06 
+and µ2=115,67°, κ2 = 4,06. As the values of kappa are higher than 1, the data in the 
+two clusters is highly concentrated, and therefore pointing to two certain directions. 
+The adapted Rayleigh-Test of 2θ (Batschelet, 1981) for bimodal models was not 
+significant (pθ > 0,05 with r = 0,54 and n = 7). Consequently, it is a weak statistical 
+evidence of a bimodal distribution. Still, there is a qualitative tendency in the two plots 
+of being a bimodal distribution. This bimodal behavior is also shown in Patel’s study 
+(Patel et al., 2022), and indicated the orientation with the use of the polarization 
+stimulus. 
+ 
+ 
+Figure 9 – Visualization of the raw data of the “training, inner circle” trails in a circular plot and representation of the 
+bimodal Circ-MLE  
+The feeder is located at the center (cross). Each dot at the edge of the circle represents a measured bearing of the inner 
+circle. In the right, a bimodal distribution is suggested. The bars show the density for the estimated distribution. The dashed 
+oval is the confidence interval for the estimate. 
+  
+Table 2 – The calculated values of different statistical tests and the adapted tests for a bimodal distribution for “training, 
+inner circle” trials 
+Condition p 
+(Rayleigh) 
+r (test 
+statistic) 
+n pθ  rθ nθ 
+Train_Inn
+erCircle 
+0,87 0,15 7 0,13 0,54 7 
+ 
+µ(Mu) [°] κ (Kappa) µ1 [°] Κ1 µ2 [°] Κ2 BestModel 
+
+
+
+=================== PAGE 31 ===================
+ 
+25 
+ 
+300,47 0,29 295.70 4.06 115.67 4.06 M3A 
+ 
+ 
+As the representation of the data of all the different tri als across stimulus rotation 
+doesn’t discriminate between strong and weak polarization (Appendix Figure A) and of 
+its effect on the bumblebees ability is not detectable, it is not informative. Thus, strong 
+and weak polarization have to be examines independently. 
+In the further analysis, t he conditions p3.5 u1.0  (DOPLR = 0,14), p4.2 u1.0 (DOPLR = 
+0,12), p4.4 u1.0 (DOPLR = 0,12; DOPTB = 0,15), p8.0 u1.0 (DOPLR, TB = 0,19), p8.0 u0.0 
+and p8.0 u2.0 (DOPTB = 0,12) are referring to strong polarization. Weak polarization is 
+considered as the conditions p3.8 u8.0  (DOPLR = 0,04; DOP TB = 0,07) , p4.2 u8.0  
+(DOPLR = 0,05), p4.3 u8.0 (DOPTB = 0,07), p4.4 u8.0 (DOPLR = 0,05), p7.7 u8.0 (DOPTB 
+= 0,08) and p8.0 u8.0 (DOPLR = 0,05; DOPTB = 0,07). 
+ 
+Strong polarization , LR  
+In the left-right condition, the orientation of the stimulus was rotated and therefore the 
+axis of the angle of polarization was shifted 90° to the path from the feeder to the nest 
+entrance. Thus, on the way back to the nest, the bumblebees experience d the same 
+orientation of the stimulus as in the training phase. As the rotation of the stimulus during 
+feeding could lead to a conflict by the bumblebees experiencing  a change in the 
+direction compared to their outbond path, it remains the same as in the familiar training 
+condition. Additionally in this data set,  the degree of pol arization was high and thus, 
+the stimulus provided strong information.  
+The data presents three different clusters of the bearings where the bumblebees left 
+the inner circle (Figure 10). There is one around 0°, one is orientated to the o pposite 
+around 180° and the third one is around 260°. The short arrow in the plot averages all 
+bearings and indicates the mean vector.  The Circ-MLE suggests an  uniform 
+distribution with weak concentrated data (M1, µ = 207,33°, κ = 0,76) Additionally,  the 
+Rayleigh test is not significant (p>0,05 with r = 0,36 and n = 9 ). As the AIC values for 
+a uniform and a bimodal distribution are quite similar (AIC M3A = 24,76 and AIC M1 = 
+25,73), a tendency towards a bimodal distribution around 0° and 180° can be assumed, 
+which is also observable in the circular plot. 
+
+
+=================== PAGE 32 ===================
+ 
+26 
+ 
+ 
+ 
+Figure 10 – Visualization of the raw data of the “strong polarization, LR, inner circle” trails in a circular plot and 
+representation of the bimodal Circ-MLE 
+The arrow indicates the mean of the direction vector and is proportional to the mean vector length. A shorter arrow refers to 
+a weaker concentration of the data. 
+ 
+Table 3 – The calculated values of different statistical tests for “strong polarization, LR, inner circle” trials 
+Condition p (Rayleigh) r 
+(statistical 
+test) 
+n µ(Mu) [°] κ (Kappa) BestModel 
+StrongPol_LR 0,33 0,36 9 207,33 0,76 M1 
+ 
+Weak  polarization, LR  
+In trials with weaker polarization, the bumblebees are expected to orient less 
+accurately, but they are still able to react to the polarization stimulus. 
+As previously described, in LR conditions, the stimulus is in a vertical position after 
+rotation, which is the direction the bumblebees should be familiar from training, but 90° 
+to the orientation they observe while walking to the feeder.  
+The measured angles point to a higher concentration of data around 160° (Figure 11). 
+This is also indicated by the mean vector, which is pointing to 160°. The arrow is slightly 
+longer than in the representations of the data of the strong polarization conditions. Circ-
+MLE suggest an unimodal distribution (M2B) . Still, as the Rayleigh test is not 
+statistically significant (p>0,05 with r = 0,31 and n = 4) and the value for kappa is <1 (κ 
+= 0,67), there is a weak concentration of the bearings. 
+
+
+
+=================== PAGE 33 ===================
+ 
+27 
+ 
+ 
+Figure 11 - Visualization of the raw data of the “weak polarization, LR, inner circle” trails in a circular plot and 
+representation of the bimodal Circ-MLE 
+ 
+Table 4 - The calculated values of different statistical tests for “weak polarization, LR, inner circle” trials 
+ 
+ 
+ 
+Strong polarization, TB  
+For the top-bottom condition, the bumblebees were able to enter the arena in the same 
+stimulus orientation as in training. After feeding at the conical feeder, the stimulus and 
+therefore the angle of polarization was rotated from being aligned with the axis from 
+the feeder to the nest entrance to being 90° shifted to this axis. If they were reacting to 
+the stimulus, they were expected to exit the inner circle at angles around 90° and 270°, 
+which are pointing to a fictive nest. If the bumblebees relied on other information, they 
+were expected to walk towards the real nest. 
+The circular plot shows a wide distribution of the data. The most measured angles are 
+occurring around 0°, which is also indicated by the arrow which points to the mean 
+vector direction close to 0°. As the Rayleigh test is not statistically significant (p>0 ,05 
+with r = 0,15 and n = 15) and the length of the mean vector is short, the data is weakly 
+concentrated (κ = 0,31 ). An uniform model (M1)  fits this distribution the best , as the 
+data doesn’t show a preferred direction. 
+Condition p (Rayleigh) r 
+(statistical 
+test) 
+n µ(Mu) [°] κ (Kappa) BestModel 
+WeakPol_LR 0,70 0,31 4 19,15 0,67 M2B 
+
+
+=================== PAGE 34 ===================
+ 
+28 
+ 
+ 
+Figure 12 - Visualization of the raw data of the “strong polarization, TB, inner circle” trails in a circular plot and 
+representation of the bimodal Circ-MLE 
+ 
+Table 5 - The calculated values of different statistical tests for “strong polarization, TB, inner circle” trials 
+Condition p (Rayleigh) r 
+(statistical 
+test) 
+n µ(Mu) [°] κ (Kappa) BestModel 
+StrongPol_TB 0,71 0,15 15 24,78 0,31 M1 
+ 
+ 
+Weak  polarization , TB  
+If the bumblebees are using the provided stimulus for their path integration behavior to 
+return back to their nest after walking to a food source, the bumblebees are expected 
+to walk to a fictive home in horizontal direction, as it is again the top-bottom condition. 
+In the circular plot, the measured bearings, presented as dots, are stronger c lustered 
+in the lower part than in the upper part of the plot. The calculated mean vector poin ts 
+to 240° (µ=241,79°). Although the Rayleigh test is not statistical significant (p>0,05 with 
+r = 0,45 and n = 6 ), Circ-MLE suggest a unimodal distribution model  (M2B). As the 
+value of kappa is around 1 (κ = 1,01), there is a higher concentration of the measured 
+bearings, compared to the conditions described before. 
+ 
+
+
+
+=================== PAGE 35 ===================
+ 
+29 
+ 
+ 
+Figure 13 - Visualization of the raw data of the “weak polarization, TB, inner circle” trails in a circular plot and 
+representation of the bimodal Circ-MLE 
+ 
+Table 6  - The calculated values of different statistical tests for “weak polarization, TB, inner circle” trials 
+Condition p (Rayleigh) r 
+(statistical 
+test) 
+n µ(Mu) [°] κ (Kappa) BestModel 
+WeakPol_TB 0,31 0,45 6 241,79 1,01 M2B 
+ 
+ 
+For better understanding of whether the bumblebee`s chosen path towards its true 
+nest or to the fictive nest direction as indicated by the angle of polarization, date were 
+separated into quadrants around the true and fictive nest (Figure 14-15).  
+In LR condition, the fictive nest correlates with their real nest, as the  angle of 
+polarization during their path back to the nest is the same as experienced during 
+training. In both DOP conditions, strong and weak, the bumblebees tend to walk back 
+to the fictive nest (Figure 14), or in this case, to their real nest. To compare  the result 
+statistically and to prove if the probability of orientation is higher than 0,5 , a binomial 
+test was performed. In strong condition, 6 of 9 (percentage of 0,67) individuals walked 
+to the fictive nest.  There result of the test shows no signific ant difference (p= 0,254; 
+95%-CI: [0,34; 1,00]).  In weak condition, 9 of 14 (percentage of 0,64) bumblebees 
+chose to walk back to the fictive nest. Still, the test was not significant (p = 0,21; 95%-
+CI: [0,39; 1,00]). Even if the test don’t show significant results, a tendency towards the 
+fictive nest, where the angle of polarization is aligned with the same axis as in training, 
+
+
+
+=================== PAGE 36 ===================
+ 
+30 
+ 
+is observable. In weaker conditions, there is stronger orientation to the fictive nest 
+compared to the stronger conditions. 
+ 
+ 
+Figure 14 – The amount of chosen paths either to their home or to their fictive nest in LR condition dependent on the 
+degree of polarization 
+The x-axis represents whether it was the conditions with stronger polarization or the ones with weaker conditions. On the y-
+axis, the number of path decisions to the fictive nest, which is designed in brown color or their home in blue is shown. 
+In LR condition, the fictive nest (brown) correlates with their real home (blue), as the direction of the polarization points to 
+their nest because of its horizontal setting. In weaker and in stronger polarization settings the bumblebees tend to walk to 
+the fictive (and therefore their real home). In weaker conditions, this behavior is even more frequent 
+ 
+Whereas the distribution of the path back to  the fictive nest or their home  is equal in 
+the TB condition (Figure 15) with stronger polarization settings. 7 of 14 (percentage of 
+0,50) bumblebees orientated towards the fictive ne st, which shows no significance in 
+the binomial test (p = 0,61; 95% -CI: [0,26;1,00]). In weaker polarization settings, 7 of 
+12 (percentage of 0,58) bumblebees tend to walk to the fictive nest. The binomial test 
+was not significant (p = 0,39; 95%-CI: [0,32; 1,00]). In TB condition, the fictive nest and 
+their real home are 90° shifted. 
+ 
+Figure 15 - The amount of chosen paths either to their home or to their fictive nest in LR condition dependent on the 
+degree of polarization 
+
+
+
+=================== PAGE 37 ===================
+ 
+31 
+ 
+In TB condition, their fictive nest (brown) is 90° shifted to their real home (blue). In stronger polarization settings, the chosen 
+way back is equal between the fictive and their real home, whereas in weaker polarization, the count of bumblebees walking 
+back to the fictive home is slightly higher. 
+ 
+4.2 MOST ACCURATE HOME VECTOR 
+To further a nalyze, whether  there was  a condition, in which the bumblebees were 
+performing a more accurate home vector than in the other polarization condition, it is 
+necessary to calculate the deviation from the real home angle to every other measured 
+angle from each trail. The real nest i s thereby located at 180°. To ve rify the results 
+statistically, a Rayleigh test was conducted. The Rayleigh test proves if the population 
+of the data has a certain tendency or if it is random. The results are presented in a 
+Boxplot (Figure 16).  
+In the circular plot (Figure 16), the measured bearings are distributed differently in all 
+the different conditions. It is also observable that the amount of measured  bearings 
+differs significantly in all the four conditions. A visual tendency towards the nest is 
+observable in the strong TB condition. 
+ 
+Figure 16 – Circular plots of the stronger and weaker polarization for LR and TB condition 
+The weaker condition is indicated as pink dots, whereas the dark red dots present the stronger polarization. A distinction is 
+made between the LR and TB trials 
+
+
+
+=================== PAGE 38 ===================
+ 
+32 
+ 
+ 
+ 
+Consequently, the data is presented in a bar plot (Figure 16) and in a Boxplot (Figure 
+17), to examine the data even better. 
+The bar plot of the LR condition shows, that the mean deviation is lower in stronger 
+polarization conditions (about 70°) than in weaker conditions (about 110°). In TB 
+conditions, the mean deviation is higher in stronger polarization conditions (about 100°) 
+compared to the weaker condition (about 75°). 
+ 
+Figure 17 - Bar plot of the average homing accuracy of strong (dark red) and weak (pink) polarization settings in LR and 
+TB condition 
+On the x-axis, the polarization strength, categorized as LR and TB, of LR and TB condition, is shown. The y-axis shows the 
+mean deviation in degrees. The lower the value of the mean deviation, the more accurate is the orientation towards the 
+nest. The bars are presenting the mean deviation in degrees. 
+In LR condition, the mean deviation of the stronger polarization condition is lower, whereas the weaker polarization 
+condition in TB trials leads to lower deviation. 
+ 
+To examine this data even better, a boxplot was used for further investigation (Figure 
+17). The boxplot sh ows the deviation from the nest. The calculated median for the 
+stronger LR condition is lower (around 55°) compared to the weaker LR condition 
+(around 125°). The interquartile range of weaker LR conditions (around 40°) exhibits a 
+slight narrowing compared to the range of stronger LR conditions (around 50°). 
+However, an upward spatial shift is observed in the graph. For TB trials, the median of 
+the stronger polarization conditions is higher (around 110°) than the median of the 
+weaker polarization conditions (around 75°). There is a higher dispersion of the 
+
+
+
+=================== PAGE 39 ===================
+ 
+33 
+ 
+interquartile range in stronger conditions (around 80°) compared to the weaker 
+polarization conditions (around 20°). 
+ 
+ 
+Figure 18- Boxplot of the Deviation from the Nest in weak and in strong polarization conditions for LR and TB condition 
+For the LR condition, the interquartile range of the strong polarization condition (dark red) is  around 50° with a median around 
+55°, whereas the interquartile range in weaker conditions (pink) is about 40° with a median of 125°. For the TB condition, the 
+interquartile range of the strong polarization condition is  around 80° with a median around 110° and the interquartile range 
+in weaker conditions  is about 20° with a median of 75° 
+ 
+The calculated mean deviations of the stronger LR and the weaker TB conditions are 
+quite similar (MDstrong,LR = 68,36°; MDweak,TB = 75,03°). Additionally, the mean deviations 
+of the LR trials in weaker polarization and the trials of TB condi tion in stronger 
+polarization are around 100° (MDweak,LR = 105,79°; MDstrong,TB = 98,71°). The standard 
+deviation is the lowest in weaker TB condition (SD weak,TB = 44,20°), slightly higher in 
+strong TB condition (SD strong,TB = 50,78) and around 62° for both LR conditions 
+(SDweak,LR = 61,96°; SDstrong,LR = 61,66°) 
+The Rayleigh test is in strong and weak polarization  for LR and TB  condition not 
+significant (p>0.05), thus there is no specific orientation in all conditions. 
+
+
+
+=================== PAGE 41 ===================
+ 
+35 
+ 
+situation and from training, as the angle of orientation was the same as in training, this 
+would have led to an orientation towards the long-term memory sector. Those sectors 
+are presented in Figure 19. 
+ 
+Figure 19 – Assignment of the bumblebee`s orientation with the usage of their short- or long-term memory 
+In light red, the region of the long-term is indicated (313°-45°, 135°-225°). If the bumblebees are using their short-term 
+memory for orientation, the measured bearings are within the light blue area (45°-135°, 225°-315°) 
+ 
+To get clear results  of the usage of long - or short -term memory, the distribution in 
+percentage by condition is s hown in the bar chart (Figure 20 ). For the LR condition, 
+66,7% of the measured b earings are located in the long -term memory region, whil e 
+33,3% are positioned in short-term memory areas. 
+In TB condition, the percentage of the bearings within the short-term regions are quite 
+higher (63,6%). 36,4% of the bearings of TB condition are placed within the long-term 
+memory area . The Chi 2 test suggest a sign ificant dependency between LR or TB 
+condition and the use of the long-term or short-term memory (p<0,05; p=0,04). 
+ 
+
+
+
+=================== PAGE 42 ===================
+ 
+36 
+ 
+ 
+Figure 20 – Distribution of the long- (LTM) or short-term memory (STM) in percentage for LR and TB condition  
+In LR condition, 66,7% of the bearing s are placed within the LTM area  and 33,3% are within the STM area. For TB condition, 
+more bearings are located around the area of the STM  (63,6%) , whereas 36,4% are within the LTM regions. The Chi2-Test has 
+a value of p=0,0379 
+ 
+Looking at all the measured bearings (Figure 21), distinguished between LR condition 
+(blue dots) and TB condition (red dots), the majority of the measured angles of the TB 
+conditions are located in the STM area, whereas the angles in LR condition are more 
+frequently located in the LTM region. 
+ 
+Figure 21 – Representation of the measured bearings, distinguished between LR (blue) and TB (red) in the different region 
+for short-term memory (STM) and long-term memory LTM) 
+More blue dots are visible in the LTM region, indicating that the use of the long-term memory was more present in the LR 
+condition. In the short-term memory areas, there is a higher amount of red dots for TB condition. 
+  
+
+
+
+=================== PAGE 45 ===================
+ 
+39 
+ 
+bumblebees learned the way back from previous foraging trips and sa ved the 
+information to use it for navigation, too. 
+Additionally, the Rayleigh test is not statistically significant (p>0,05) in all the different 
+observed conditions, which leads to the conclusion that there is no evidence for a 
+preferred direction and the refore the orientations of the bumblebees are statistically 
+random. Still, the low amount of samples from different investigated trials should be in 
+mind. 
+Furthermore, the direction of the provided pola rization stimulus is important, as it is 
+shown in Figure 13 and Figure 14. In the LR condition, the fictive nest, indicated by the 
+vertical direction of the stimulus, correlates with their home.  Thus, the bumblebees 
+exhibit a higher tendency to go back to the fictive nest. As it is the same case in weaker 
+condition, the bumblebees are not necessary able to use the provided stimulus and 
+therefore the use of another potential information for orientation could be possible. The 
+bumblebees could receive this information through the  usage of their long -term 
+memory. 
+To summarize, the bumblebees still orient toward the home direction in the TB and 
+even under the conflicting LR condition. In some trials, the bumblebees are reacting to 
+the stimulus, but some of the bumblebees doesn’t seem to react to the direction of the 
+polarization at all. Although the data of the training trails indicated that the bumblebees 
+are reacting to the stimulus, a higher concentrated clustering of the bearings closer to 
+0° and 180° were expected. With higher degree of polarization,  it was predicted that 
+the bumblebees were strongly reacting to the stimulus and moved towards the true or 
+fictive nest, as a higher degree of polarization offers a stronger and more reliable cue. 
+Other than expected, the bumblebees orientation towards their real home seems to be 
+better in weaker TB conditions.  
+This result could suggest that the bumblebees are not performing their path integration 
+with the  only use of polarization. This behavior would be important, if the skylight 
+polarization patterns would not b e available or less available in the bumblebee’ s 
+natural environment as it would be the case in cloudy or foggy conditions. Furthermore, 
+the bumblebees could learn to find their way back to their home with using their 
+knowledge to walk back, which indicates the usage of their long -term memory. Either 
+way, as the Rayleigh test was not significant in all of the observed conditions, a larger 
+sample of the different trials is obligatory to get clear evidence. 
+
+
+=================== PAGE 56 ===================
+ 
+VII 
+ 
+8 INDEX OF FIGURES AND TABLES 
+Appendix for Figures  
+Figure 1 - The schematic and basic principles of path integration........................................................ 1 
+Figure 2 – Schematic representation of two –unpolarized and linearly polarized - polarization types
+ ................................................................................................................................................................. 5 
+Figure 3 – A filter material, as a linear  polarizer, transforms unpolarized light into linearly polarized 
+light.......................................................................................................................................................... 6 
+Figure 4 – Polarized-light patterns of skylight ....................................................................................... 7 
+Figure 5 – The polarization pattern in a bright and clear sky with the sun shining ............................. 8 
+Figure 6 – The polarization patterns in three different cloudy conditions ........................................... 9 
+Figure 7 – Representation of the location of the dorsal rim area and an electron micrograph of 
+cross-sections through the dorsal rim area of the honeybee Apis mellifera ..................................... 10 
+Figure 8 -  Experimental design ............................................................................................................ 17 
+Figure 9 – Visualization of the raw data of the “training, inner circle” trails in a circular plot and 
+representation of the bimodal Circ-MLE.............................................................................................. 24 
+Figure 10 – Visualization of the raw data of the “strong polarization, LR, inner circle” trails in a 
+circular plot and representation of the bimodal Circ-MLE .................................................................. 26 
+Figure 11 - Visualization of the raw data of the “weak polarization, LR, inner circle” trails in a 
+circular plot and representation of the bimodal Circ-MLE .................................................................. 27 
+Figure 12 - Visualization of the raw data of the “strong polarization, TB, inner circle” trails in a 
+circular plot and representation of the bimodal Circ-MLE .................................................................. 28 
+Figure 13 - Visualization of the raw data of the “weak polarization, TB, inner circle” trails in a 
+circular plot and representation of the bimodal Circ-MLE .................................................................. 29 
+Figure 14 – The amount of chosen paths either to their home or to their fictive nest in LR condition 
+dependent on the degree of polarization ............................................................................................ 30 
+Figure 15 - The amount of chosen paths either to their home or to their fictive nest in LR condition 
+dependent on the degree of polarization ............................................................................................ 30 
+Figure 16 – Circular plots of the stronger and weaker polarization for LR and TB condition ............ 31 
+Figure 17 - Bar plot of the average homing accuracy of strong (dark red) and weak (pink) 
+polarization settings in LR and TB condition ....................................................................................... 32 
+Figure 18- Boxplot of the Deviation from the Nest in weak and in strong polarization conditions for 
+LR and TB condition .............................................................................................................................. 33 
+Figure 19 – Assignment of the bumblebee`s orientation with the usage of their short- or long-term 
+memory ................................................................................................................................................. 35 
+Figure 20 – Distribution of the long- (LTM) or short-term memory (STM) in percentage for LR and 
+TB condition .......................................................................................................................................... 36 
+Figure 21 – Representation of the measured bearings, distinguished between LR (blue) and TB (red) 
+in the different region for short-term memory (STM) and long-term memory LTM) ........................ 36 
+ 
+Appendix for Tables  
+Table 1 - The different settings and conditions used in the experiment ............................................ 19 
+Table 2 – The calculated values of different statistical tests and the adapted tests for a bimodal 
+distribution for “training, inner circle” trials ....................................................................................... 24 
+Table 3 – The calculated values of different statistical tests for “strong polarization, LR, inner circle” 
+trials ....................................................................................................................................................... 26 
+
+
+=================== PAGE 61 ===================
+ 
+ 
+21w p8.0 u1.0 TB 3 o 1.141 
+21w p8.0 u1.0 TB 1 o -91.254 
+21w p8.0 u1.0 TB 2 o -90.200 
+21w p4.2 u1.0 LR 1 o -90.000 
+21w p8.0 u1.0 LR 1 o -91.597 
+21w p8.0 u0.0 training 1 o 126.422 
+ 
+ 
+ 
+ 
+Figure   A - Visualization of the raw data of all “LR, inner circle” and “TB, inner circle” trails in a circular plot (A) and 
+representation of the bimodal MLE (B) without the discrimination between strong and weak polarization 
+A) The feeder is located at the center (cross). Each dot at the edge of the circle represents a measured bearing of the inner 
+circle. The arrow indicates the mean of the direction vector and is proportional to the mean vector length. A shorter arrow 
+refers to a weaker concentration of the data. B) For each condition, a bimodal distribution is suggested. The bars show the 
+density for the estimated distribution. The dashed oval is the confidence interval for the estimate.  
+The affection of the bumblebee’s ability to use polarization information for orientation within different intensities is not able 
+to see, therefore this representation is not informative.  
+ 
+  
+A) 
+A) 
+B) 
+

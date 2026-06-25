@@ -1,0 +1,9 @@
+{
+  "inner_diameter_cm": 74,
+  "outer_diameter_cm": 132,
+  "center_offset_x_px": 208,
+  "center_offset_y_px": -7,
+  "event_debounce_frames": 2,
+  "visit_gap_frames": 20,
+  "_comment": "Measured from HoughCircles detection on video frames. Outer circle (132 cm) is the active tracking arena boundary. Inner circle (74 cm) is the feeder/dark zone. center_offset_* is the offset from image center in pixels (full 1920px resolution). These dimensions are ~2x the previous incorrect values of 84/42 cm."
+}

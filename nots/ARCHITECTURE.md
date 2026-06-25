@@ -31,13 +31,13 @@
 │  │  │   └─ Detects bee using background subtraction                  │
 │  │  │   └─ Outputs: CSV, .results, .settings                         │
 │  │  │                                                                 │
-│  │  ├─ Step 2: [OPTIONAL] Apply ROI filter (roi_filter.py)          │
-│  │  │   └─ If roi_config.json exists → filter frames by circle      │
-│  │  │   └─ Marks frames outside ROI as "missing=1"                  │
+│  │  ├─ Step 2: Post-process arena events (post_process_tracking.py)   │
+│  │  │   └─ Inner Ø42 cm / Outer Ø84 cm circles                       │
+│  │  │   └─ Writes *_id0_new.csv + *_events.csv (raw id0 preserved)  │
 │  │  │                                                                 │
 │  │  └─ Step 3: Generate tracked MP4 (generate_tracked_video.py)     │
-│  │      └─ Reads filtered CSV                                        │
-│  │      └─ Draws circles & angles on video                          │
+│  │      └─ Reads *_id0_new.csv                                       │
+│  │      └─ Draws 84 cm gray + 42 cm yellow circles                   │
 │  │      └─ Outputs *_tracked.mp4                                    │
 │  │                                                                 │
 │  └─ Log results to batch_log.txt                                     │
@@ -66,8 +66,9 @@
 │     ├─ 2025-06-03 14-57-02_tracked.mp4   (⭐ visualization video)    │
 │     │                                                                   │
 │     ├─ data/                                                           │
-│     │  ├─ 2025-06-03 14-57-02_id0.csv        (tracking data)         │
-│     │  └─ 2025-06-03 14-57-02_id0_backup.csv (backup if ROI used)   │
+│     │  ├─ 2025-06-03 14-57-02_id0.csv        (raw TRex export)      │
+│     │  ├─ 2025-06-03 14-57-02_id0_new.csv    (enriched + events)    │
+│     │  └─ 2025-06-03 14-57-02_events.csv     (entry/exit summary)   │
 │     │                                                                   │
 │     ├─ trex.log                           (TREX debug output)         │
 │     ├─ generate_tracked.log               (MP4 generation log)        │

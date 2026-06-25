@@ -46,7 +46,8 @@ This project tracks bumblebee movement and behavior in controlled video recordin
 │           TRACKED VIDEO GENERATOR                           │
 │       (generate_tracked_video.py)                          │
 ├─────────────────────────────────────────────────────────────┤
-│ • Reads TREX CSV output (data/*_id0.csv)                   │
+│ • Reads enriched CSV (data/*_id0_new.csv)                  │
+│ • Draws 84 cm outer (gray) and 42 cm inner (yellow) circles│
 │ • Draws bee position (green circle = detected)             │
 │ • Draws angle line (heading direction)                     │
 │ • Displays speed & detection status                        │
@@ -71,7 +72,9 @@ This project tracks bumblebee movement and behavior in controlled video recordin
 ├─────────────────────────────────────────────────────────────┤
 │ • tracking_quality_summary.csv (per-video metrics)        │
 │ • *_tracked.mp4 (visualization)                            │
-│ • data/*_id0.csv (raw tracking data)                       │
+│ • data/*_id0.csv (raw TRex)                                │
+│ • data/*_id0_new.csv (arena events + zones)                │
+│ • data/*_events.csv (entry/exit summary)                   │
 │ • trex.log (debug info)                                    │
 │ • average_*.png (background reference)                     │
 └─────────────────────────────────────────────────────────────┘

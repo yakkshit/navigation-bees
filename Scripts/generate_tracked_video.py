@@ -2,6 +2,7 @@
 """
 Generate tracked video from TREX CSV output with angle visualization.
 Shows bee position, orientation angle, speed, and detection status.
+Optimized for multi-core processors using thread-based queues for frame I/O.
 """
 
 import cv2
@@ -9,8 +10,12 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+import queue
+import threading
 import sys
+from dotenv import load_dotenv
+
+from arena_config import load_circle_config, arena_center_px, radius_px, find_source_video
 
 # Load env config
 env_path = Path(__file__).parent.parent / ".env.local"
@@ -22,10 +27,65 @@ elif (Path(__file__).parent.parent / ".env").exists():
 # Configuration
 OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "/Users/yakkshit/Downloads/project/hiwi2/p1/V_OUTPUTS"))
 INPUT_VIDEO_DIR = Path(os.getenv("INPUT_VIDEO_DIR", os.getenv("INPUT_DIR", "/Users/yakkshit/Downloads/project/hiwi2/p1/Videos")))
+# Set FULL_RES=1 to write at original resolution (slower). Default: half-res for speed.
+FULL_RES = os.getenv("FULL_RES", "0") == "1"
+
+
+class ThreadedVideoReader:
+    def __init__(self, video_path, queue_size=256):
+        self.video_path = video_path
+        self.cap = cv2.VideoCapture(str(video_path))
+        self.queue = queue.Queue(maxsize=queue_size)
+        self.stopped = False
+        self.thread = threading.Thread(target=self._reader, daemon=True)
+        self.thread.start()
+
+    def _reader(self):
+        frame_idx = 0
+        while not self.stopped:
+            ret, frame = self.cap.read()
+            if not ret:
+                self.queue.put((None, None))
+                break
+            self.queue.put((frame_idx, frame))
+            frame_idx += 1
+        self.cap.release()
+
+    def read(self):
+        return self.queue.get()
+
+    def stop(self):
+        self.stopped = True
+        self.cap.release()
+
+
+class ThreadedVideoWriter:
+    def __init__(self, output_path, fourcc, fps, size, queue_size=256):
+        self.out = cv2.VideoWriter(str(output_path), fourcc, fps, size)
+        self.queue = queue.Queue(maxsize=queue_size)
+        self.stopped = False
+        self.thread = threading.Thread(target=self._writer, daemon=True)
+        self.thread.start()
+
+    def _writer(self):
+        while not self.stopped:
+            frame = self.queue.get()
+            if frame is None:
+                break
+            self.out.write(frame)
+        self.out.release()
+
+    def write(self, frame):
+        self.queue.put(frame)
+
+    def close(self):
+        self.queue.put(None)
+        self.thread.join()
+
 
 def parse_settings(settings_path):
     """Read cm_per_pixel, source video path, and track_include from a TRex settings file."""
-    cm_per_pixel = 0.0773
+    cm_per_pixel = 0.1546
     source_video = None
     track_include = None
     if not settings_path.exists():
@@ -54,26 +114,6 @@ def parse_settings(settings_path):
                     pass
     return cm_per_pixel, source_video, track_include
 
-def find_source_video(video_dir, settings_path):
-    """Resolve the exact source video for a TRex output folder."""
-    _, source_from_settings, _ = parse_settings(settings_path)
-    if source_from_settings and source_from_settings.exists():
-        return source_from_settings
-
-    video_name = video_dir.name
-    exact = INPUT_VIDEO_DIR / f"{video_name}.mp4"
-    if exact.exists():
-        return exact
-
-    matches = sorted(INPUT_VIDEO_DIR.glob(f"{video_name}.*"))
-    for candidate in matches:
-        if candidate.suffix.lower() in {".mp4", ".mov", ".avi", ".mkv"}:
-            return candidate
-
-    raise FileNotFoundError(
-        f"No source video found for '{video_name}' in {INPUT_VIDEO_DIR}"
-    )
-    
 
 def generate_tracked_video(video_name=None):
     """Generate tracked video with angle visualization."""
@@ -93,7 +133,10 @@ def generate_tracked_video(video_name=None):
 
     print(f"\n📹 Processing: {video_dir.name}")
 
-    csv_files = list((video_dir / "data").glob("*_id0.csv"))
+    csv_files = list((video_dir / "data").glob("*_id0_new.csv"))
+    if not csv_files:
+        csv_files = list((video_dir / "data").glob("*_id0.csv"))
+        csv_files = [p for p in csv_files if not p.name.endswith("_id0_new.csv")]
     if not csv_files:
         print(f"❌ No tracking CSV found in {video_dir / 'data'}")
         return False
@@ -117,7 +160,7 @@ def generate_tracked_video(video_name=None):
     cm_per_pixel, _, track_include_poly = parse_settings(settings_path)
 
     try:
-        video_path = find_source_video(video_dir, settings_path)
+        video_path = find_source_video(video_dir, settings_path, INPUT_VIDEO_DIR)
     except FileNotFoundError as e:
         print(f"❌ {e}")
         return False
@@ -125,26 +168,42 @@ def generate_tracked_video(video_name=None):
     print(f"   Video: {video_path.name}")
     print(f"   cm_per_pixel: {cm_per_pixel}")
 
-    cap = cv2.VideoCapture(str(video_path))
-    if not cap.isOpened():
+    # Temporary cap to read video meta properties
+    cap_temp = cv2.VideoCapture(str(video_path))
+    if not cap_temp.isOpened():
         print(f"❌ Failed to open video: {video_path}")
         return False
 
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    fps = cap_temp.get(cv2.CAP_PROP_FPS)
+    width = int(cap_temp.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap_temp.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    total_frames = int(cap_temp.get(cv2.CAP_PROP_FRAME_COUNT))
+    cap_temp.release()
 
-    print(f"   Resolution: {width}x{height} @ {fps:.1f} FPS")
+    # Determine output resolution — half-res by default for speed
+    if FULL_RES or width <= 960:
+        out_width, out_height = width, height
+        scale = 1.0
+    else:
+        out_width, out_height = width // 2, height // 2
+        scale = 0.5
+
+    print(f"   Resolution: {width}x{height} → output {out_width}x{out_height} @ {fps:.1f} FPS")
     print(f"   Video frames: {total_frames}")
 
     output_video_path = video_dir / f"{video_dir.name}_tracked.mp4"
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    out = cv2.VideoWriter(str(output_video_path), fourcc, fps, (width, height))
+    # Try avc1 for fast hardware-assisted encoding, fallback to mp4v
+    fourcc = cv2.VideoWriter_fourcc(*"avc1")
+    test_writer = cv2.VideoWriter(str(output_video_path), fourcc, fps, (out_width, out_height))
+    if not test_writer.isOpened():
+        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        test_writer.release()
+    else:
+        test_writer.release()
 
-    if not out.isOpened():
-        print("❌ Failed to create output video")
-        return False
+    # Start threaded reader and writer
+    reader = ThreadedVideoReader(video_path)
+    writer = ThreadedVideoWriter(output_video_path, fourcc, fps, (out_width, out_height))
 
     print(f"   Output: {output_video_path.name}")
 
@@ -155,47 +214,41 @@ def generate_tracked_video(video_name=None):
         if pd.notna(row[frame_col])
     }
 
-    # Determine arena center/radius for drawing the boundary overlay.
-    # Default: centered at ~(640, 360) with radius ~295px based on camera setup.
-    
-    # Default fallback center (middle of the image)
-    # arena_center = (width // 2, height // 2)
-    # arena_radius = min(width, height) * 30 // 100 
+    # Arena circles — scale to output resolution
+    circle_cfg = load_circle_config(video_dir.name)
+    arena_center_full = arena_center_px(width, height, circle_cfg, cm_per_pixel, video_name=video_path.name, video_path=video_path)
+    arena_center = (int(arena_center_full[0] * scale), int(arena_center_full[1] * scale))
+    outer_radius = radius_px(circle_cfg["outer_radius_cm"], cm_per_pixel / scale if scale != 1.0 else cm_per_pixel)
+    inner_radius = radius_px(circle_cfg["inner_radius_cm"], cm_per_pixel / scale if scale != 1.0 else cm_per_pixel)
+    print(f"   Outer arena: Ø{circle_cfg['outer_diameter_cm']}cm → r={outer_radius}px")
+    print(f"   Inner zone:  Ø{circle_cfg['inner_diameter_cm']}cm → r={inner_radius}px")
+    print(f"   Arena center: {arena_center}")
 
-    # Tweak these numbers manually until the circle aligns perfectly with feeder
-    manual_center_x = (width // 2) - 50  # Shifts 15 pixels to the left
-    manual_center_y = (height // 2) + 5  # Shifts 20 pixels down
-
-    arena_center = (manual_center_x, manual_center_y)
-    arena_radius = 230  # Adjust radius value in pixels directly to frame the mirror edge
-
-    # If track_include polygon exists, compute its bounding circle as a visual hint.
-    if track_include_poly and len(track_include_poly) > 0 and len(track_include_poly[0]) > 0:
-        poly_pts = np.array(track_include_poly[0], dtype=np.float32)
-        (cx, cy), cr = cv2.minEnclosingCircle(poly_pts)
-        inner_center = (int(cx), int(cy))
-        inner_radius = int(cr)
-        print(f"   Track-include zone: center=({int(cx)},{int(cy)}), radius={inner_radius}px")
-    else:
-        inner_center = None
-        inner_radius = None
+    inner_center = arena_center
+    inner_radius_draw = inner_radius
 
     detection_count = 0
     total_processed = 0
     last_x_px = None
     last_y_px = None
 
-    for frame_idx in range(total_frames):
-        ret, frame = cap.read()
-        if not ret:
+    # Font scale for half-res output
+    font_scale = 0.6 if scale < 1.0 else 0.7
+    font_scale_small = 0.4 if scale < 1.0 else 0.5
+
+    while True:
+        frame_idx, frame = reader.read()
+        if frame is None:
             break
 
-        # Draw arena boundary on every frame (full outer arena in white)
-        cv2.circle(frame, arena_center, arena_radius, (200, 200, 200), 2)
-        #                  ↑ position   ↑ radius       ↑ gray color    ↑ line thickness
-        # If a track_include polygon was set, draw it in yellow so it's visible
-        if inner_center is not None:
-            cv2.circle(frame, inner_center, inner_radius, (0, 255, 255), 1)
+        # Resize if needed for faster encoding
+        if scale != 1.0:
+            frame = cv2.resize(frame, (out_width, out_height), interpolation=cv2.INTER_LINEAR)
+
+        # Outer arena boundary (84 cm diameter) — gray circle
+        cv2.circle(frame, arena_center, outer_radius, (200, 200, 200), 2, cv2.LINE_AA)
+        # Inner feeder zone (42 cm diameter) — yellow circle
+        cv2.circle(frame, inner_center, inner_radius_draw, (0, 255, 255), 1, cv2.LINE_AA)
 
         row = tracking_by_frame.get(frame_idx)
         if row is None:
@@ -205,20 +258,28 @@ def generate_tracked_video(video_name=None):
                 f"Frame: {frame_idx}/{total_frames}",
                 (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                0.7,
+                font_scale,
                 (150, 150, 150),
                 2,
+                cv2.LINE_AA,
             )
-            out.write(frame)
+            writer.write(frame)
             total_processed += 1
             continue
 
         is_missing = row["missing"] == 1.0
+        outside_arena = row.get("outside_arena", 0) == 1 if "outside_arena" in row.index else False
+        if outside_arena:
+            is_missing = True
+
+        circle_event = ""
+        if "circle_event" in row.index and pd.notna(row["circle_event"]) and str(row["circle_event"]).strip():
+            circle_event = str(row["circle_event"]).strip()
 
         try:
             x_cm = row["X (cm)"]
             y_cm = row["Y (cm)"]
-            angle = row["ANGLE"]
+            angle = row["HEADING_ANGLE"] if "HEADING_ANGLE" in row.index and pd.notna(row["HEADING_ANGLE"]) else row["ANGLE"]
             speed = row["SPEED (cm/s)"]
         except KeyError:
             x_cm = np.inf
@@ -227,27 +288,28 @@ def generate_tracked_video(video_name=None):
             speed = 0
 
         if np.isfinite(x_cm) and np.isfinite(y_cm):
-            x_px = int(x_cm / cm_per_pixel)
-            y_px = int(y_cm / cm_per_pixel)
+            x_px = int(x_cm / cm_per_pixel * scale)
+            y_px = int(y_cm / cm_per_pixel * scale)
         else:
-            x_px = width // 2
-            y_px = height // 2
+            x_px = out_width // 2
+            y_px = out_height // 2
 
-        x_px = max(0, min(x_px, width - 1))
-        y_px = max(0, min(y_px, height - 1))
+        x_px = max(0, min(x_px, out_width - 1))
+        y_px = max(0, min(y_px, out_height - 1))
         angle = angle if np.isfinite(angle) else 0
 
+        detection_count += 1 if not is_missing and row.get("arena_tracked", 1 if not is_missing else 0) == 1 else 0
         if not is_missing:
-            detection_count += 1
             last_x_px = x_px
             last_y_px = y_px
-            cv2.circle(frame, (x_px, y_px), 15, (0, 255, 0), 2)
+            color = (0, 255, 0) if row.get("in_inner_circle", 0) != 1 else (0, 200, 255)
+            cv2.circle(frame, (x_px, y_px), 15, color, 2, cv2.LINE_AA)
 
             if pd.notna(angle):
                 line_len = 40
                 end_x = int(x_px + line_len * np.cos(angle))
                 end_y = int(y_px + line_len * np.sin(angle))
-                cv2.line(frame, (x_px, y_px), (end_x, end_y), (0, 255, 0), 2)
+                cv2.line(frame, (x_px, y_px), (end_x, end_y), (0, 255, 0), 2, cv2.LINE_AA)
 
             if pd.notna(speed) and speed > 0:
                 cv2.putText(
@@ -255,9 +317,10 @@ def generate_tracked_video(video_name=None):
                     f"Speed: {speed:.2f} cm/s",
                     (x_px + 20, y_px - 10),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
+                    font_scale_small,
                     (0, 255, 0),
                     1,
+                    cv2.LINE_AA,
                 )
 
             if pd.notna(angle):
@@ -267,46 +330,78 @@ def generate_tracked_video(video_name=None):
                     f"Angle: {angle_deg:.1f} deg",
                     (x_px + 20, y_px + 10),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
+                    font_scale_small,
                     (0, 255, 0),
                     1,
+                    cv2.LINE_AA,
                 )
         else:
             # MISSING: draw red X at last known position if available, else at CSV position
             draw_x = x_px if (np.isfinite(row["X (cm)"] if "X (cm)" in row else np.inf)) else (last_x_px or x_px)
             draw_y = y_px if (np.isfinite(row["Y (cm)"] if "Y (cm)" in row else np.inf)) else (last_y_px or y_px)
-            cv2.circle(frame, (draw_x, draw_y), 15, (0, 0, 255), 2)
-            cv2.line(frame, (draw_x - 10, draw_y - 10), (draw_x + 10, draw_y + 10), (0, 0, 255), 2)
-            cv2.line(frame, (draw_x - 10, draw_y + 10), (draw_x + 10, draw_y - 10), (0, 0, 255), 2)
+            cv2.circle(frame, (draw_x, draw_y), 15, (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.line(frame, (draw_x - 10, draw_y - 10), (draw_x + 10, draw_y + 10), (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.line(frame, (draw_x - 10, draw_y + 10), (draw_x + 10, draw_y - 10), (0, 0, 255), 2, cv2.LINE_AA)
 
         status = "DETECTED" if not is_missing else "MISSING"
+        if outside_arena:
+            status = "OUTSIDE ARENA"
         status_color = (0, 255, 0) if not is_missing else (0, 0, 255)
         cv2.putText(
             frame,
             f"Frame: {frame_idx}/{total_frames} - {status}",
             (10, 30),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
+            font_scale,
             status_color,
             2,
+            cv2.LINE_AA,
         )
+        if circle_event:
+            cv2.putText(
+                frame,
+                f"Event: {circle_event}",
+                (10, 60),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                font_scale,
+                (0, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
+        if "in_inner_circle" in row.index and row.get("in_inner_circle", 0) == 1 and not is_missing:
+            cv2.putText(
+                frame,
+                "IN INNER",
+                (10, 90),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                font_scale,
+                (0, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
 
-        out.write(frame)
+        writer.write(frame)
         total_processed += 1
 
         if total_processed % 100 == 0:
             print(f"   Progress: {total_processed}/{total_frames} frames", end="\r")
 
-    cap.release()
-    out.release()
+    reader.stop()
+    writer.close()
 
     detection_pct = 100 * detection_count / total_processed if total_processed > 0 else 0
 
     print(f"\n✅ Tracked video created: {output_video_path.name}")
     print(f"   Detected frames: {detection_count}/{total_processed} ({detection_pct:.1f}%)")
-    print(f"   File size: {output_video_path.stat().st_size / (1024 * 1024):.1f} MB")
+    try:
+        import time
+        time.sleep(0.5)
+        print(f"   File size: {output_video_path.stat().st_size / (1024 * 1024):.1f} MB")
+    except Exception as e:
+        print(f"   File size: unknown ({e})")
 
     return True
+
 
 def diagnose_tracking_quality():
     """Analyze why tracking quality might be low."""
@@ -365,6 +460,7 @@ def diagnose_tracking_quality():
             print("      • Verifying video lighting/contrast")
         else:
             print("   ✅ Detection rate is good (>70%)")
+
 
 if __name__ == "__main__":
     print("\n" + "=" * 60)

@@ -1,0 +1,114 @@
+
+=================== PAGE 1 ===================
+Bumblebee Path Integra0on 
+What we are doing 
+We are tes0ng whether bumblebees can orient under low-light condi0ons using polarised cues, a 
+feature normally seen in nocturnal species. Each video shows one bumblebee released into an arena; 
+the bee searches for food and then exits. By tracking the path we ask whether the bee's orienta0on 
+can be explained by path integra0on. 
+Funda's role 
+1.Watch all videos and select the best-quality recordings. 
+2.Run TRex on each accepted video and obtain its path. 
+3.Compute a fixed set of behavioural metrics for each video. 
+Status colours used in this document 
+•Ready  —  TRex gives this directly, no extra work needed. 
+•Compute  —  a simple formula on the TRex output. 
+•Decide  —  needs a threshold or definition before we can compute. 
+A.  What we will measure 
+Metric What it tells us Status
+General movement metrics
+Trajectory The full 2D path of the bee — the foundation of 
+every other metric. Ready
+Walking speed How fast the bee is moving (cm/s). Ready
+Acceleration How fast the bee speeds up or slows down (cm/s²).Ready
+Path straightness How direct the path was — 1 = perfectly straight, 0 
+= closed loop. Compute
+Vector stability How steady the velocity vector was — 1 = constant 
+motion, 0 = random. Compute
+Heading consistency How tightly the heading clusters around a mean 
+direction. Compute
+Pauses (number & duration)When and how long the bee stopped. Decide
+Search events Bouts of slow movement combined with high 
+turning. Decide
+
+
+=================== PAGE 2 ===================
+B.  What we s0ll need to decide 
+Drift How far sideways the bee strayed from a reference 
+line. Decide
+Exit angle Direction the bee crosses any defined boundary. Decide
+Orientation recovery Time to return to baseline heading after a 
+disturbance. Decide
+Exploratory vs goal-directedShare of the trial spent searching vs heading 
+purposefully. Decide
+Metric What it tells us Status
+Topic What we need to decide
+1. Experimental design
+Outbound or inbound? Do we analyse the trip toward the food, the trip back, or both?
+Training vs test trials Are training and test videos analysed the same way, or differently?
+Bee identification Are bees individually marked? How many trials per bee — do we need 
+repeated-measures statistics?
+Conditions & sample size Full list of conditions (light levels, ocelli-covered, controls) and number 
+of bees per condition?
+Match Marie's dataset Should we compute the same metrics as Marie's analysis so results are 
+directly comparable?
+2. Arena, calibration & stimulus
+Arena geometry Outer / inner / intermediate circle radii (cm)? Centre coordinates? Food 
+location?
+Calibration Real arena width (cm) and camera frame rate (fps)?
+Stimulus timing Is the polarised stimulus on continuously, or only at certain moments?
+Stimulus position Where is the stimulus — overhead, side? This sets the reference axis.
+Reference axis (0°) Is 0° the expected nest direction, arena north, or the stimulus axis?
+3. Time events to mark in each video
+Release frame How do we identify the release moment in each video?
+Food-found frame What counts as 'the bee found the food'? (Lands on it / stops near it / 
+specific behaviour)
+Initial heading window How long after release do we measure the first direction? (1, 3, or 5 s)
+Multiple search loops If the bee leaves and re-enters the inner circle, do we analyse each loop 
+separately or pool them?
+
+
+=================== PAGE 3 ===================
+C.  Video quality checklist 
+☐  The bee is fully visible from start to end. 
+☐  Only one bee is in the arena. 
+☐ Ligh0ng is stable. 
+☐  Camera is ﬁxed — no shake or driO. 
+☐  Polariser and s0mulus log show no equipment issues. 
+☐  The bee performed the full task: release → food → exit. 
+☐  No reﬂec0ons, dirt, or mo0on blur block the bee. 
+☐  Trial dura0on is suﬃcient to cover all phases. 
+☐  Frame rate is consistent — no dropped frames. 
+☐  Calibra0on data exists for that recording session. 
+4. Behaviour thresholds 
+Pause rule Speed below ___ cm/s for at least ___ seconds?
+Search rule Speed below ___ cm/s AND turning above ___ rad/s?
+Goal-directed rule Sliding-window straightness above ___ AND speed above ___ cm/s?
+Trial exclusion Beyond video quality: when do we exclude a trial? (Bee never engages / 
+never exits / partial only)
+Topic What we need to decide
+
+
+=================== PAGE 4 ===================
+D.  Standardised pipeline (12 steps) 
+4.Apply the quality checklist. 
+5.Calibrate: set the arena width in centimetres. 
+6.Run TRex (background subtraction, one individual). 
+7.Inspect the CSV for tracking gaps. 
+8.Compute the path-integration metrics  (group A). 
+9.Compute the general movement metrics  (group B). 
+10.Add a per-trial summary row to the master CSV . 
+11.Generate a trajectory plot with the circles overlaid. 
+12.Back up the CSVs and plots to lab storage. 
+E.  TRex command (single bumblebee) 
+trex \ 
+  -gpu_torch_device cpu \ 
+  -i /full/path/<video>.mp4 \ 
+  -detect_type background_subtraction \ 
+  -track_max_individuals 1 \ 
+  -meta_real_width <ARENA_WIDTH_CM> \ 
+  -track_max_speed 50 \ 
+  -output_format csv \ 
+  -auto_quit true \ 
+  -nowindow true
+

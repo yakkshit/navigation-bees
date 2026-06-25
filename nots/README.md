@@ -124,9 +124,10 @@ bumblebee_task/
 
 | Script | Purpose | Input | Output |
 |--------|---------|-------|--------|
-| `new_batch.sh` | **Main entry point** — orchestrates entire pipeline | Videos/ folder | `V_OUTPUTS/` |
-| `roi_tracker_gui.py` | Draw ROI circle on first frame | Video file | `roi_config.json` |
-| `roi_filter.py` | Filter tracking CSV by ROI circle | CSV + ROI JSON | Filtered CSV |
+| `new_batch.sh` | **Main entry point** — TRex → post-process → MP4 | `Videos/` | `V_OUTPUTS/` |
+| `post_process_tracking.py` | Arena circle events → `*_id0_new.csv` | `*_id0.csv` | `*_id0_new.csv`, `*_events.csv` |
+| `generate_tracked_video.py` | Tracked MP4 with circles | `*_id0_new.csv` + video | `*_tracked.mp4` |
+| `check_tracking_quality.py` | Quality summary | `V_OUTPUTS/` | `tracking_quality_summary.csv` |
 | `generate_tracked_video.py` | Create MP4 with bee position/angle visualized | CSV + video | `*_tracked.mp4` |
 | `check_tracking_quality.py` | Generate summary statistics | All CSVs | `tracking_quality_summary.csv` |
 | `bee_analysis.ipynb` | Interactive analysis & plotting | CSV files | Plots & stats |
@@ -154,7 +155,7 @@ bumblebee_task/
 ### CSV Data
 **Format:** Frame-by-frame tracking results  
 **Columns:** X, Y, ANGLE, SPEED, ACCELERATION, missing flag, etc.  
-**Location:** `V_OUTPUTS/{video_name}/data/*_id0.csv`
+**Location:** `V_OUTPUTS/{video_name}/data/*_id0_new.csv` (enriched) or `*_id0.csv` (raw TRex)
 
 ---
 

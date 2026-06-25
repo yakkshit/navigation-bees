@@ -1,0 +1,364 @@
+
+=================== PAGE 6 ===================
+the directional cue was rotated either by 90 /C14from its original po-
+sition (polarization ﬁeld) or by 180 /C14(green LED). If bumblebees
+use these cues to inform their orientation choices, their home-
+ward paths should reﬂect the rotations of the stimuli ( Figures
+4A and 4D). This would result in a perpendicular orientation
+with respect to the hive for the polarized light ﬁeld and in an
+orientation opposite of the hive for the green LED. In control tri-
+als, stimuli remained in the same position between outbound and
+homeward paths. For all trials with the polarized light ﬁeld, path
+orientations were expected to follow a bimodal distribution,
+since an isolated polarized light pattern only offers an axis of
+orientation.
+When the polarized ﬁeld was static, homeward paths were
+oriented parallel to the direction of the hive (data were doubled
+to create a unimodal distribution; STAR Methods ; 348.05
+/C14±
+40.2/C14, p < 0.001; Figure 4B; all orientation statistics are summa-
+rized in Tables S1 and S2). When the polarized ﬁeld was rotated
+90/C14, individuals oriented their homeward paths perpendicular to
+the direction of the hive (doubled data, 161.75 /C14± 32.6 /C14,
+p < 0.001; Figure 4B; Video S3). To ensure bees were indeed ori-
+enting to the polarization pattern the ﬁlter created rather than
+other unintended artifacts of the ﬁlter, such as potential small dif-
+ferences in brightness across the ﬁlter, control experiments were
+conducted during which the ﬁlter was conﬁgured to provide a
+depolarized light ﬁeld. Under this condition, bees no longer ex-
+hibited straight homeward paths, and these paths exhibited no
+signiﬁcant orientation (p = 0.526; Figure 4 C; Table S3 ). Taken
+together, these results show that B. terrestris use overhead po-
+larization information when available to orient while walking.
+During experiments when the position of the LED was ﬂipped
+180
+/C14, homeward paths were primarily oriented in the opposite di-
+rection of the hive (197.45 /C14± 34.15 /C14, p = 0.001). During control
+trials when the LED was left in place, homeward paths were ori-
+ented toward the hive (17.36 /C14± 14.55 /C14, p < 0.001; Figure 4 E;
+Video S4 ). Since the homeward directions from the ﬁrst set of
+these point source experiments appeared clustered directly
+opposite of the green LED rather than around the expected po-
+sition of the hive, we examined whether this bias was consistent
+in a repetition of the experiment with independently trained bees.
+Orientations from the second set of trials were more clearly
+centered toward the direction of the hive in the predicted manner
+rather than away from the direction of the LED (ﬁxed, 356.83
+/C14±
+20.43/C14, p < 0.001; rotated, 191.38/C14± 26.07/C14, p < 0.001; Figure 4E;
+Table S4 ), suggesting that the bees perform true menotactic
+orientation rather than simple negative phototaxis. Overall, these
+results indicate that B. terrestris can orient using a bright point
+source while walking. During these experiments, the bees may
+have interpreted the bright LED as the Sun, although it is also
+possible that the light was interpreted as an Earth-bound cue.
+Bumblebees prefer to orient using a point source rather
+than overhead polarization patterns
+Similar to our bumblebees, many animals can use more than a
+single cue for orientation. When orientation responses are exam-
+ined in a natural environment or in a laboratory setting, some cues
+are weighted more heavily than others and therefore dominate in
+experimentally generated cue-conﬂict situations.
+5,10,12,18,36,37
+Since we demonstrated that B. terrestris will orient to overhead
+polarization patterns and a point source when both cues were
+in isolation, we next were interested in which of the two cues
+the bumblebees preferred to orient with when both were available
+in concert.
+As in previous experiments, bumblebees were allowed to
+freely forage in the arena for 3 days while the overhead polariza-
+tion ﬁeld and the point source were both present in the arena.
+These cues were arranged so that the bright LED was located
+157.5
+/C14from the hive and 90 /C14with respect to the angle of polar-
+ized light at an elevation of 21.8 /C14, loosely mimicking the natural
+skylight situation close to dusk or dawn. After familiarization,
+bees were allowed to forage individually. Once a bee was trap-
+ped in the feeder, both orientation cues were rotated by 90
+/C14.
+Considering the results from the previous experiments, bees
+were predicted to orient 90 /C14from the direction of the hive in
+this condition. Finally, each orientation cue was individually
+rotated by 90/C14, whereas the other cue remained in its original po-
+sition. If B. terrestris weights one of the two cues more strongly,
+the bees should follow the stimulus rotation only when the domi-
+nant cue had been rotated ( Figure 5A).
+When neither cue was manipulated, bees oriented signiﬁcantly
+in the axis of the hive (doubled data, 7.39
+/C14± 38.96/C14, p < 0.001).
+During experiments in which both cues were rotated, bees ori-
+ented perpendicular to the hive direction, as expected (doubled
+data, 181.52/C14± 55.41/C14, p = 0.016). During trials when the orien-
+tation cues were rotated in isolation, bees ignored the rotation
+and oriented toward the hive when only the polarization pattern
+was rotated (doubled data, 349.8 /C14± 20.63/C14, p < 0.001) and fol-
+lowed the stimulus manipulation when only the point source
+was moved (doubled data, 169.31 /C14± 44.69 /C14, p = 0.004). These
+results demonstrate that bees weighted the point source more
+highly than the polarization ﬁeld in the navigation arena and
+consequently ignored the polarization stimulus when choosing
+a walking direction if it conﬂicted with the azimuth information
+of the point source ( Figure 5B).
+Bumblebees perform systematic search patterns when
+home vectors fail
+In the previous displacement experiments, the end of a home run
+of a bee was deﬁned by a sudden change in extended walking
+direction, revealing the bee’s estimate of where its hive should
+be. At this point, the bees executed stereotyped search behav-
+iors to locate their home, a key feature of path integration in
+many species.
+3,4,6,25,27 In most experiments, these searches
+were located around a nest position that was close to one of
+the arena walls so that the resulting search pattern was geomet-
+rically biased by the limits of the arena. We therefore analyzed
+search behaviors only from the edge-displacement experiments
+under polarized light ﬁelds oriented identically between the two
+arenas. In those conditions, searches started near the center
+of the arena and therefore were geometrically unbiased. These
+observed search behaviors were composed of loops that started
+and ended near the search initiation point, therefore being most
+focused around the search origin, and increased in size over time
+(Figures 6A and 6B).
+In other path-integrating animals, homing usually consists of a
+straight, quick home vector followed by a contorted and often
+slower search pattern.
+3,27,38 In contrast, we found that although
+bumblebees exhibited search patterns that were much more
+tortuous than home vectors, walking speed remained relatively
+ll
+OPEN ACCESS
+Current Biology 32, 2871–2883, July 11, 2022 2875
+Article
+
+
+=================== PAGE 7 ===================
+Figure 4. Bombus terrestris use directional cues present in the arena for orientation during path integration while walking
+(A) Polarization orientation experimental design: An overhead polarized light ﬁeld was rotated 90 /C14from its original position once animals reached the feeder.
+Homeward paths were predicted to be oriented perpendicular to the direction of the hive if overhead polarization patterns were used for orientation.
+(B) Orientations of homeward paths for polarization orientation experiments. The polarized light ﬁeld was either ﬁxed in place or rotated (directio n: curved gray
+arrow). Arrows in each plot: mean vectors (arrow angles, circular mean; curved arrowheads, circular standard deviations; arrow lengths, strength o f orientation
+[R]). Both groups exhibited signiﬁcant orientations and were signiﬁcantly differently oriented from one another (p < 0.05).
+(C) Path tracings of all home vectors before search behaviors were initiated under polarized and depolarized light. Straight homeward paths were only observed in
+3 of 14 trials under depolarized light ﬁelds.
+(D) Point source orientation experimental design: a green LED point source was ﬂipped 180
+/C14from its original position once animals reached the feeder.
+Homeward paths were predicted to be oriented in the opposite direction of the hive if B. terrestris were orienting using the point source.
+(E) Orientations of homeward paths for point source orientation experiments. All groups exhibited signiﬁcant orientations, and manipulated group s were
+signiﬁcantly differently oriented from not manipulated groups (p < 0.05). For summary of all orientation statistics, see Tables S1 and S2.
+See also Tables S3 and S4.
+ll
+OPEN ACCESS
+2876 Current Biology 32, 2871–2883, July 11, 2022
+Article
+
+
+=================== PAGE 8 ===================
+constant throughout both phases of homeward travel and over
+the duration of the search ( Figures 6D–6F).
+To examine whether walking bumblebee search patterns
+quantitatively resemble those observed in other species as
+well as those predicted by optimal search theory, we determined
+the rate of the bees’ search expansion by measuring the farthest
+distance between the bee and the search initiation point during
+each successive increasing loop in the search, until bees
+reached a distance of 25 cm to the arena wall (the distance of
+the ﬁctive hive entrance from the arena wall). This limit was
+imposed to prevent the constraints of the arena wall to impact
+the free expansion of the search. Assuming constant detection
+width of the nest, constant speed, and a Gaussian uncertainty
+distribution, optimal search theory predicts a parabolic shape
+of the search distribution to maximize search success. This re-
+sults in an expected increase of search radius proportional to
+the square root of the search time, radius
+max f time0.5.1 Data
+from desert ant searches 25 match this prediction, with the
+maximum search radius being proportional to time 0.48.1 Simi-
+larly, the radii of searches in mantis shrimp following path inte-
+gration home vectors expand at a rate proportional to
+time0.43.27 By ﬁtting a power function to our data, we observed
+that the search patterns of walking bumblebees expand at a
+rate proportional to time 0.40 (Figures 6 C, 6G, 6H, and S3).
+When only the initial expansion of the search is observed, further
+limiting the potential constraining effect of the arena wall, the
+expansion rate of the searches was proportional to time
+0.47 (Fig-
+ure 6 I), very closely approximating the expansion of searches
+predicted by optimal search theory and matching those ex-
+hibited by other path-integrating animals.
+Vector navigation behavior is resilient to
+anesthetization and surgery
+Our assay offers a robust tool to dissect vector navigation in the
+laboratory over relatively short distances, an asset for future
+electrophysiological investigations aimed at probing the neural
+basis of path integration. To conﬁrm the utility of our assay for
+electrophysiology, we investigated the resilience of the bees’
+vector memories to invasive experimental procedures. This
+included subjecting the bumblebees to anesthesia and to a
+surgery similar to that required by electrophysiological studies
+targeting insect central brain regions.
+33,39–42
+Following familiarization under a polarized light ﬁeld, once bees
+located the central feeder, they were trapped, removed from the
+arena, and anesthetized in a chill-coma. In a subset of bees, the
+head cuticle was cut with a sharp razor in three cuts over the cen-
+tral brain ( Figure 7 A), and the incisions were sealed with dental
+resin. Bees subjected to surgery were allowed 6 h of recovery
+time before experimentation, whereas bees that were only anes-
+thetized were used immediately. In a third group of bees, the sta-
+bility of the vector memory over time was analyzed by keeping the
+bees trapped in the feeder for 12 h before experimentation,
+without anesthetization. All bees were reintroduced to the center
+of the behavioral arena with the overhead polarized ﬁlter oriented
+either the same or orthogonal to its original position ( Figure 7B).
+Bumblebees that were returned immediately to the arena after
+anesthetization exhibited extended periods of stillness and undi-
+rected walking in and around the feeder, usually within a 14 cm
+radius of the feeder and lasting on average approximately
+30 min, before making paths considered homing runs by our cri-
+terion. A notable proportion of these bees did not make clear
+homing runs at all ( Table S3 ). Although a large enough sample
+to claim signiﬁcant orientation was only collected during trials
+when the polarized ﬁlter was rotated 90
+/C14(doubled data,
+188.86/C14± 33.63/C14, p < 0.001; Figure 7E), the eventual post-anes-
+thesia home runs from both groups were generally oriented as
+predicted by the overhead polarized light ﬁeld. This indicated
+that the vector memories were anesthesia resistant but that
+sufﬁciently long recovery periods were needed for successful
+homing behavior.
+Figure 5. Bombus terrestris prefer to orient using a point source rather than an overhead polarization ﬁeld in the arena while path integrating
+(A) Conﬂicting cues experimental design: to determine if bumblebees preferred to use the polarized light ﬁeld or the green LED for orientation when bo th are
+present in the arena, both cues were rotated 90 /C14either together or in isolation. If the bees prefer one of the two orientation cues, they should only orient 90 /C14from
+the hive when the dominant cue has been rotated.
+(B) Orientations of homeward paths for conﬂicting cue orientation experiments. Under each condition, the orientation cues were either ﬁxed in place or rotated
+(direction: curved gray arrows). All groups exhibited signiﬁcant orientations (p < 0.05). Asterisks (*) indicate manipulation conditions with gro up orientations that
+were signiﬁcantly differently oriented from trials when no manipulations occurred (p < 0.01). Arrows in each plot: mean vectors (arrow angles, circu lar mean;
+curved arrowheads, circular standard deviations; arrow lengths, strength of orientation [
+R]). For summary of all orientation statistics, see Tables S1 and S2.
+See also Tables S3 and S4.
+ll
+OPEN ACCESS
+Current Biology 32, 2871–2883, July 11, 2022 2877
+Article
+
+
+=================== PAGE 9 ===================
+Conﬁrming the high stability of the observed vector memories,
+bees that were caught and trapped at the feeder for 12 h ex-
+hibited homing behaviors comparable with those released
+immediately in the arena (doubled data; ﬁxed, 357.49
+/C14±
+54.89/C14; rotated 90 /C14, 200.32/C14± 51.45/C14, both p < 0.01; Figure 7F).
+Thus, extended recovery times post-anesthesia of at least up to
+12 h are possible without signiﬁcant detriment to the homing be-
+haviors we present.
+Finally, bees were tested after anesthetization, surgery, and
+6 h of recovery time. When the polarized ﬁeld was oriented the
+Figure 6. Bombus terrestris perform systematic search behaviors when path integration home vectors fail to locate the hive
+(A) Example of a search behavior during a trial when a bee was displaced to the edge of arena 2. Larger empty circle, displaced feeder where bee was introduced;
+smaller empty circle, vector position of the ﬁctive hive.
+(B) A heat map of all search behaviors compiled during edge-displacement experiments with no polarizer offset.
+(C) A heat map of all search behaviors in (B) up to a distance of 25 cm from to the arena wall (dashed circle) used for analysis in (H).
+(D) Straightness of paths during the homing and search phases of center- and edge-displacement experiments (where path straightness = beeline dista nce/path
+length). Home vector paths were straighter than search paths (p < 0.001; all other pairwise comparisons, p > 0.1).
+(E) Walking speed remained approximately constant during homing and search phases (p = 0.512; c
+2 = 3.284). Bars, medians; boxes, lower and upper quartiles;
+whiskers, sample minima and maxima; points, outliers.
+(F) Mean walking speed of each bumblebee during the search phase of edge-displacement experiments. Bars show average walking speeds over 1-s interva ls
+throughout a search for each bee, with error bars (±SD) indicating relatively constant walking speeds during searches.
+(G) Search behavior from (A) but with the colored section highlighting completed loops before the search expanded to a distance of 25 cm to the wall, as u sed for
+analyses in (H).
+(H) Absolute radii of searches in (C) with at least one completed loop before the search expanded to a distance of 25 cm from the arena wall (n = 8). The maxi mum
+distance of each increasing search loop from the search origin is plotted against time after search initiation. Colors, individual searches; black l ine, the
+power function of best ﬁt for all data, yielding a search expansion relation with radius
+max f time0.4. Optimal search theory predicts that searches should expand
+by radiusmax f time0.5 (gray line). Dashed blue line: the distance between the search origin and the 25 cm limit from the arena wall for the search plotted in the
+same color.
+(I) Same as (H) except constrained to the ﬁrst 100 s of search. The initial search expansion (radius
+max f time0.47) better ﬁts the expansion predicted by optimal
+search theory.
+See also Figure S3.
+ll
+OPEN ACCESS
+2878 Current Biology 32, 2871–2883, July 11, 2022
+Article
+
+
+=================== PAGE 10 ===================
+Figure 7. Vector navigation in Bombus terrestris is resilient to anesthetization and surgery
+(A and B) Surgery experimental design (A). During surgery, head cuticles were cut along the dotted lines and subsequently patched. After recovery, be es were
+returned to the arena and polarization orientation experiments were performed as in (B).
+(legend continued on next page)
+ll
+OPEN ACCESS
+Current Biology 32, 2871–2883, July 11, 2022 2879
+Article
+
+
+=================== PAGE 17 ===================
+feeder. Once they returned to the feeder, they were trapped in the feeder once more, displaced back to arena 1, and allowed to return
+back to the hive ( Figure 3A). To control for any effect the edge of the plug ﬁlling the center feeder position during edge-displacement
+experiments may have had on inﬂuencing a homing bee to end its home-vector and start a search pattern, edge displacement ex-
+periments were repeated when the polarized light ﬁeld over the second arena was offset 45 /C14from the polarized light ﬁeld in the ﬁrst
+arena, orienting homing bees away from the center of arena and the plug that was located there.
+During experiments in which the polarization ﬁeld was manipulated, once an experimental animal found the central feeder, the bee
+was trapped and the composite polarization ﬁlter with the polarizer-side facing downwards over the arena, creating a linearly polar-
+ized ﬁeld, was rotated 90
+/C14from its original position and the bee was released. In control trials, the polarizer was rotated 45 /C14forward
+and backwards by the researcher, so it ended at its original position ( Figure 4A). To verify that bees were orienting to the polarization
+pattern the ﬁlter produced, the ﬁlter was placed diffuser-side downward over the arena, creating a depolarized ﬁeld during the entire
+trial and was rotated 45 /C14forward and backwards so it ended at its original position.
+During green point-source orientation experiments, trials were run in the presence of a single green LED 157.5 /C14relative to the hive
+entrance from the center of the arena. The position of the LED was chosen to limit parallax when a bee was moving towards or away
+from the feeder without having the LED completely aligned with the hive axis, making the cue appear as an inﬁnitely distant one would
+while preventing the use of a simple phototaxis strategy to follow the exact home direction. Once a bee was trapped at the central
+feeder, the green LED was turned off and an identical one was turned on 180
+/C14from the original LED’s position and the bee was
+released. As a control, the green LED was turned off and turned back on at its original position when a bee was trapped at the feeder.
+During conﬂict experiments, both the overhead polarization ﬁeld and the green LED was present. Once an animal was trapped at
+the feeder, one of four conditions were enacted: 1. The polarizer was rotated 45 /C14forward and backwards and the green LED was
+turned off and back on at the original position (neither cue’s position was changed). 2. Both cues were rotated 90 /C14in the same
+direction. 3. The polarizer was rotated 90 /C14and the green LED remained in the same position. 4. The green LED was rotated 90 /C14
+and the polarizer remained in the same position.
+During anesthetization and surgery experiments, once a bee found the central feeder, it was trapped and removed from the arena.
+The bee was then placed in a -20/C14C freezer for between 7 and 15 minutes, until it could no longer move any of its limbs (a chill-coma).
+The bee was then removed from the freezer and three shallow slits in a U-shape were cut into its head cuticle over the location of the
+cerebral ganglion ( Figure 7A). The cuts were patched with a light-curing dental resin (tgﬂow, Technical & General Ltd.) and the bee
+was allowed to recover in an upright tube (35 mm inner diameter) in the dark for six hours. Following recovery, bees were placed back
+in the conical feeder and returned to the center of the arena, with the overhead polarized light ﬁeld either oriented the same or 90
+/C14
+from its original position pre-surgery and homeward paths were observed. The same procedure was used for chill-coma anesthesia
+experiments, where bees were placed into a chill-coma and immediately returned to the arena without undergoing a surgery. For the
+12-hour time-delay experiments, bees were trapped at the feeder for 12 hours without further manipulations and returned to the
+arena.
+QUANTIFICATION AND STATISTICAL ANALYSIS
+Foraging paths to and from food locations to the hive were video recorded at 10 frames per second. Videos were unwarped to correct
+for lens distortion and distortion due to camera placement using the Camera Calibration Toolbox in Matlab (vR2020a, MathWorks).
+To differentiate homeward paths from continued arena exploration, paths from the feeder were considered to be homeward paths
+when a straight path started at most 14 cm from the feeder and when they did not deviate more than 90
+/C14from their initial trajectories
+for at least 28 cm. From these homeward paths, search behaviors were determined to be initiated when an animal turned more than
+90
+/C14from its initial trajectory and continued walking at a distance of at least 14 cm. The number of trials with homeward paths per
+experimental condition is reported in Table S3.
+Paths were automatically tracked using the software ivTrace (v2.23, Bielefeld University), from which the output is given as Car-
+tesian coordinates. From these measures, home vector lengths and beeline distances from the feeder to the hive entrance were
+determined. The straightness of paths and mean walking speeds during both the home vector and search phases of homeward travel
+were also calculated. Further, for search behaviors from edge displacement experiments without an offset in polarizer orientation
+between the two arenas, mean walking speeds binned over one second increments (10 frames) were calculated for the entirety of
+the search.
+Additionally, the orientation of homeward paths when bees were 28 cm from the feeder in relation to the hive entrance was re-
+corded using the angle tool in ImageJ (v2.3.0, Fiji).
+Search behaviors with at least one completed loop were analyzed from all trials when animals were displaced to the edge position
+of arena 2 with the polarizer set in the same position between the two arenas, since searches should start at approximately the center
+of the arena, negating the potential effect the proximity to the arena wall would have on biasing the geometry of the search. The radii
+of these search behaviors were measured as the farthest distance of each successive increasing search loop from the point of search
+initiation (i.e. the end point of the home vector) using the line tool in ImageJ. To limit the potential effect the proximity to the arena wall
+may have had on search expansion, the absolute radius of each search loop was measured from the beginning of the search until
+bees reached a distance of 25 cm from the arena wall. To observe the general expansion pattern of the maximal search radius,
+only search loops larger than previous loops were included. These values were plotted over time and ﬁtted with a power function.
+ll
+OPEN ACCESS
+e3 Current Biology 32, 2871–2883.e1–e4, July 11, 2022
+Article
+
