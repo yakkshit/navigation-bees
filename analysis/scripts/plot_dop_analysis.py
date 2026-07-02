@@ -159,6 +159,24 @@ def load_trajectory(id0_file, cx_cm, cy_cm):
     except Exception:
         return None
 
+def split_inbound_outbound(traj):
+    """
+    Split the trajectory dataframe into inbound (approaching feeder) and outbound (leaving feeder).
+    The splitting frame is the frame where distance to feeder (r) is minimized,
+    provided it is close enough to the center (r < 5.0 cm). Otherwise we default to first frame.
+    """
+    if traj is None or len(traj) == 0:
+        return None, None
+    min_idx = traj["r"].idxmin()
+    min_r = traj["r"].min()
+    if min_r < 5.0:
+        inbound = traj.iloc[:min_idx + 1]
+        outbound = traj.iloc[min_idx:]
+    else:
+        inbound = traj.iloc[:1]
+        outbound = traj
+    return inbound, outbound
+
 def draw_circular_arena(ax, inner_r=INNER_R_CM, outer_r=OUTER_R_CM, bg_color="white"):
     """Draw circular arena boundaries."""
     ax.add_patch(Circle((0, 0), inner_r, fill=False, edgecolor="#bbb", lw=1.0, ls="--", zorder=2))
@@ -363,17 +381,36 @@ def plot_condition_summaries(df, trajectories):
         fig, ax = plt.subplots(figsize=(5, 5))
         draw_circular_arena(ax)
         
+        # Track whether we've added legend markers to avoid duplicate labels
+        added_legend = False
+        
         for _, trial in sub.iterrows():
             traj = trajectories.get(trial["folder"])
             if traj is not None:
-                ax.plot(traj["x"], traj["y"], lw=0.8, alpha=0.5, color="#1E88E5" if cue == "LR" else "#E53935")
+                inbound, outbound = split_inbound_outbound(traj)
                 
-                # plot exit coordinates if valid
-                inner_cross = traj[traj["dist_to_center_cm"] > INNER_R_CM]
-                if not inner_cross.empty:
-                    pt = inner_cross.iloc[0]
-                    ax.plot(pt["x"], pt["y"], "o", color="blue" if cue == "LR" else "red", ms=3, alpha=0.8)
+                # Plot Inbound (approach path)
+                if inbound is not None and len(inbound) > 1:
+                    ax.plot(inbound["x"], inbound["y"], lw=0.6, alpha=0.4, color="#90A4AE", ls=":")
+                    # Entry point (green triangle)
+                    ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=4, zorder=4,
+                            label="Entry" if not added_legend else "")
+                
+                # Plot Outbound (departure path)
+                if outbound is not None and len(outbound) > 0:
+                    ax.plot(outbound["x"], outbound["y"], lw=0.8, alpha=0.6, color="#1E88E5" if cue == "LR" else "#E53935")
                     
+                    # Exit point (circle on boundary)
+                    ang = trial["inner_exit_angle_deg"]
+                    if not np.isnan(ang):
+                        ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                                "o", color="#0D47A1" if cue == "LR" else "#B71C1C", ms=4, zorder=5,
+                                label="Exit" if not added_legend else "")
+                        added_legend = True
+                        
+        if added_legend:
+            ax.legend(loc="upper right", fontsize=8)
+            
         ax.set_title(f"Cue: {cue} | p{P} u{U} | DoP = {dop:.2f}\n(n = {len(sub)} trials)")
         
         # save name clean
@@ -461,13 +498,21 @@ def plot_individual_grids(df, trajectories):
             
             traj = trajectories.get(trial["folder"])
             if traj is not None:
-                ax.plot(traj["x"], traj["y"], lw=0.8, color="#2196F3" if trial["cue"] == "LR" else "#F44336")
+                inbound, outbound = split_inbound_outbound(traj)
                 
-                # Highlight exit direction
-                ang = trial["inner_exit_angle_deg"]
-                if not np.isnan(ang):
-                    ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
-                            "o", color="black", ms=4, zorder=5)
+                # Inbound (approach)
+                if inbound is not None and len(inbound) > 1:
+                    ax.plot(inbound["x"], inbound["y"], lw=0.6, alpha=0.4, color="#90A4AE", ls=":")
+                    ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=3.5, zorder=4)
+                    
+                # Outbound (return)
+                if outbound is not None and len(outbound) > 0:
+                    ax.plot(outbound["x"], outbound["y"], lw=0.8, color="#2196F3" if trial["cue"] == "LR" else "#F44336")
+                    
+                    ang = trial["inner_exit_angle_deg"]
+                    if not np.isnan(ang):
+                        ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                                "o", color="#0D47A1" if trial["cue"] == "LR" else "#B71C1C", ms=4, zorder=5)
                     
             ax.set_title(f"DoP: {trial['dop']:.2f} ({trial['cue']})\nAngle: {trial['inner_exit_angle_deg']:.1f}°", 
                          fontsize=7)
@@ -505,11 +550,16 @@ def plot_r13_grid(df, trajectories):
     for _, row in low_dop.iterrows():
         t = trajectories.get(row["folder"])
         if t is not None:
-            ax.plot(t["x"], t["y"], lw=0.7, color="#78909C", alpha=0.7)
-            ang = row["inner_exit_angle_deg"]
-            if not np.isnan(ang):
-                ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
-                        "o", color="#37474F", ms=4, zorder=5)
+            inbound, outbound = split_inbound_outbound(t)
+            if inbound is not None and len(inbound) > 1:
+                ax.plot(inbound["x"], inbound["y"], lw=0.5, alpha=0.3, color="#90A4AE", ls=":")
+                ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=3.0, zorder=4)
+            if outbound is not None and len(outbound) > 0:
+                ax.plot(outbound["x"], outbound["y"], lw=0.7, color="#78909C", alpha=0.7)
+                ang = row["inner_exit_angle_deg"]
+                if not np.isnan(ang):
+                    ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                            "o", color="#37474F", ms=4, zorder=5)
     ax.set_title(f"R13 — Low DoP (DoP < 0.10)\nn = {len(low_dop)} trials")
     
     # 2. High DoP (DoP >= 0.10)
@@ -519,11 +569,16 @@ def plot_r13_grid(df, trajectories):
     for _, row in high_dop.iterrows():
         t = trajectories.get(row["folder"])
         if t is not None:
-            ax.plot(t["x"], t["y"], lw=0.7, color="#FF7043", alpha=0.7)
-            ang = row["inner_exit_angle_deg"]
-            if not np.isnan(ang):
-                ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
-                        "o", color="#D84315", ms=4, zorder=5)
+            inbound, outbound = split_inbound_outbound(t)
+            if inbound is not None and len(inbound) > 1:
+                ax.plot(inbound["x"], inbound["y"], lw=0.5, alpha=0.3, color="#90A4AE", ls=":")
+                ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=3.0, zorder=4)
+            if outbound is not None and len(outbound) > 0:
+                ax.plot(outbound["x"], outbound["y"], lw=0.7, color="#FF7043", alpha=0.7)
+                ang = row["inner_exit_angle_deg"]
+                if not np.isnan(ang):
+                    ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                            "o", color="#D84315", ms=4, zorder=5)
     ax.set_title(f"R13 — High DoP (DoP ≥ 0.10)\nn = {len(high_dop)} trials")
     
     # 3. LR Cue
@@ -533,11 +588,16 @@ def plot_r13_grid(df, trajectories):
     for _, row in lr_cue.iterrows():
         t = trajectories.get(row["folder"])
         if t is not None:
-            ax.plot(t["x"], t["y"], lw=0.7, color="#29B6F6", alpha=0.7)
-            ang = row["inner_exit_angle_deg"]
-            if not np.isnan(ang):
-                ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
-                        "o", color="#0277BD", ms=4, zorder=5)
+            inbound, outbound = split_inbound_outbound(t)
+            if inbound is not None and len(inbound) > 1:
+                ax.plot(inbound["x"], inbound["y"], lw=0.5, alpha=0.3, color="#90A4AE", ls=":")
+                ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=3.0, zorder=4)
+            if outbound is not None and len(outbound) > 0:
+                ax.plot(outbound["x"], outbound["y"], lw=0.7, color="#29B6F6", alpha=0.7)
+                ang = row["inner_exit_angle_deg"]
+                if not np.isnan(ang):
+                    ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                            "o", color="#0277BD", ms=4, zorder=5)
     ax.set_title(f"R13 — LR Cue (Expected: 180° / 0°)\nn = {len(lr_cue)} trials")
     
     # 4. TB Cue
@@ -547,11 +607,16 @@ def plot_r13_grid(df, trajectories):
     for _, row in tb_cue.iterrows():
         t = trajectories.get(row["folder"])
         if t is not None:
-            ax.plot(t["x"], t["y"], lw=0.7, color="#EC407A", alpha=0.7)
-            ang = row["inner_exit_angle_deg"]
-            if not np.isnan(ang):
-                ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
-                        "o", color="#C2185B", ms=4, zorder=5)
+            inbound, outbound = split_inbound_outbound(t)
+            if inbound is not None and len(inbound) > 1:
+                ax.plot(inbound["x"], inbound["y"], lw=0.5, alpha=0.3, color="#90A4AE", ls=":")
+                ax.plot(inbound["x"].iloc[0], inbound["y"].iloc[0], "^", color="#4CAF50", ms=3.0, zorder=4)
+            if outbound is not None and len(outbound) > 0:
+                ax.plot(outbound["x"], outbound["y"], lw=0.7, color="#EC407A", alpha=0.7)
+                ang = row["inner_exit_angle_deg"]
+                if not np.isnan(ang):
+                    ax.plot(INNER_R_CM * np.cos(np.radians(ang)), INNER_R_CM * np.sin(np.radians(ang)), 
+                            "o", color="#C2185B", ms=4, zorder=5)
     ax.set_title(f"R13 — TB Cue (Expected: 90° / 270°)\nn = {len(tb_cue)} trials")
     
     plt.suptitle("Dedicated Navigational Profiles: Bee R13", fontsize=13, y=1.01)

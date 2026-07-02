@@ -8,3 +8,5 @@
 /Output/trex_outputs/bee_results/**/*
 
 bumblebee_task/Output/trex_outputs/bee_results/
+
+/nots/*
